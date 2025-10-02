@@ -1,3 +1,5 @@
+using eAgenda.Infraestrutura.Orm;
+
 namespace eAgenda.WebApp
 {
     public class Program
@@ -5,6 +7,8 @@ namespace eAgenda.WebApp
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddCamadaInfraestrutura(builder.Configuration);
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

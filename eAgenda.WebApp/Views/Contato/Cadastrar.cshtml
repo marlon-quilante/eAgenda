@@ -1,0 +1,46 @@
+﻿@model CadastrarContatoViewModel
+
+@{
+    ViewBag.Titulo = "Cadastro de Contato";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-8 col-lg-6 needs-validation">
+        <form class="container-fluid mt-3" asp-action="Cadastrar" method="post">
+            <div class="mb-3">
+                <label class="form-label" asp-for="Nome">Nome:</label>
+                <input class="form-control" asp-for="Nome" id="Nome" type="text" placeholder="Nome do contato" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Telefone">Telefone:</label>
+                <input class="form-control" asp-for="Telefone" id="Telefone" type="text" placeholder="(99) 99999-9999" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Email">Email:</label>
+                <input class="form-control" asp-for="Email" id="Email" type="text" placeholder="email@email.com" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Empresa">Empresa:</label>
+                <input class="form-control" asp-for="Empresa" id="Empresa" type="text" placeholder="Empresa do contato" />
+                <span asp-validation-for="Empresa" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" asp-for="Cargo">Cargo:</label>
+                <input class="form-control" asp-for="Cargo" id="Cargo" type="text" placeholder="Cargo do contato" />
+                <span asp-validation-for="Cargo" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex justify-content-end gap-2">
+                <a class="btn btn-secondary" asp-action="Index">Voltar</a>
+                <button class="btn btn-success" type="submit">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>

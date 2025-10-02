@@ -1,0 +1,38 @@
+﻿@model VisualizarContatosViewModel
+
+@{
+    ViewBag.Titulo = "Contatos";
+}
+
+<div>
+    <a class="btn btn-primary mb-3" asp-action="Cadastrar">
+        <i class="bi bi-plus"></i>
+        Cadastrar
+    </a>
+</div>
+
+<div class="row g-2">
+    @foreach (DetalhesContatoViewModel c in Model.Contatos)
+    {
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p class="card-text mb-0"><strong>Nome: </strong>@c.Nome</p>
+                    <p class="card-text mb-0"><strong>Telefone: </strong>@c.Telefone</p>
+                    <p class="card-text mb-0"><strong>Email: </strong>@c.Email</p>
+                    <p class="card-text mb-0"><strong>Empresa: </strong>@c.Empresa</p>
+                    <p class="card-text mb-0"><strong>Cargo: </strong>@c.Cargo</p>
+
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-primary rounded-circle me-2 d-flex justify-content-center align-items-center" style="height: 35px; width: 35px" asp-action="Editar" asp-route-idParaEditar="@c.Id">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger rounded-circle d-flex justify-content-center align-items-center" style="height: 35px; width: 35px" asp-action="Excluir" asp-route-idParaExcluir="@c.Id">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,4 +1,5 @@
-﻿using eAgenda.Infraestrutura.Orm.ModuloContato;
+﻿using eAgenda.Infraestrutura.Orm.ModuloCompromisso;
+using eAgenda.Infraestrutura.Orm.ModuloContato;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace eAgenda.Infraestrutura.Orm
             });
 
             services.AddScoped<IRepositorioContato, RepositorioContato>();
+            services.AddScoped<IRepositorioCompromisso, RepositorioCompromisso>();
 
             return services;
         }

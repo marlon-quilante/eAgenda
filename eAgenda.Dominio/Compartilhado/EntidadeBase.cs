@@ -1,4 +1,4 @@
-﻿namespace eAgenda.Dominio.ModuloContato
+﻿namespace eAgenda.Dominio.Compartilhado
 {
     public class EntidadeBase<T>
     {

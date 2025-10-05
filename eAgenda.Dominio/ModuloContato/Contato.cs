@@ -1,4 +1,7 @@
-﻿namespace eAgenda.Dominio.ModuloContato
+﻿using eAgenda.Dominio.Compartilhado;
+using eAgenda.Dominio.ModuloCompromisso;
+
+namespace eAgenda.Dominio.ModuloContato
 {
     public class Contato : EntidadeBase<Contato>
     {
@@ -7,6 +10,7 @@
         public string Email { get; set; }
         public string Empresa { get; set; }
         public string Cargo { get; set; }
+        public List<Compromisso> Compromissos { get; set; }
 
         public Contato() { }
 

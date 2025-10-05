@@ -20,3 +20,37 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+.menu {
+    background-color: lightgrey;
+}
+
+.btnMenu {
+    background-color: transparent;
+    color: darkorange;
+    font-weight: bold;
+}
+
+.btnMenuSelecionado {
+    background-color: darkorange;
+    color: white;
+    font-weight: bold;
+}
+
+.btnTema {
+    background-color: darkorange;
+    color: white;
+}
+
+.btnVoltar {
+    background-color: transparent;
+    color: black;
+}

@@ -18,7 +18,7 @@ namespace eAgenda.WebApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<Contato> contatos = repositorioContato.SelecionarRegistros(); 
+            List<Contato> contatos = repositorioContato.SelecionarRegistros();
 
             VisualizarContatosViewModel visualizarVM = new VisualizarContatosViewModel(contatos);
 
@@ -36,6 +36,9 @@ namespace eAgenda.WebApp.Controllers
         [HttpPost("Cadastrar")]
         public IActionResult Cadastrar(CadastrarContatoViewModel cadastrarVM)
         {
+            if (!ModelState.IsValid)
+                return View(cadastrarVM);
+
             Contato novoContato = new Contato(cadastrarVM.Nome, cadastrarVM.Telefone, cadastrarVM.Email, cadastrarVM.Empresa, cadastrarVM.Cargo);
 
             repositorioContato.Cadastrar(novoContato);
@@ -43,42 +46,45 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Editar/{idParaEditar:guid}")]
-        public IActionResult Editar(Guid idParaEditar)
+        [HttpGet("Editar/{id:guid}")]
+        public IActionResult Editar(Guid id)
         {
-            Contato contato = repositorioContato.SelecionarRegistroPorId(idParaEditar);
+            Contato contato = repositorioContato.SelecionarRegistroPorId(id);
 
             EditarContatoViewModel editarVM = new EditarContatoViewModel(contato.Id, contato.Nome, contato.Telefone, contato.Email, contato.Empresa, contato.Cargo);
 
             return View(editarVM);
         }
 
-        [HttpPost("Editar/{idParaEditar:guid}")]
-        public IActionResult Editar(Guid idParaEditar, EditarContatoViewModel editarVM)
+        [HttpPost("Editar/{id:guid}")]
+        public IActionResult Editar(Guid id, EditarContatoViewModel editarVM)
         {
+            if (!ModelState.IsValid)
+                return View(editarVM);
+
             Contato contatoAtualizado = new Contato(editarVM.Nome, editarVM.Telefone, editarVM.Email, editarVM.Empresa, editarVM.Cargo);
 
-            repositorioContato.Editar(idParaEditar, contatoAtualizado);
+            repositorioContato.Editar(id, contatoAtualizado);
 
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Excluir/{idParaExcluir:guid}")]
-        public IActionResult Excluir(Guid idParaExcluir)
+        [HttpGet("Excluir/{id:guid}")]
+        public IActionResult Excluir(Guid id)
         {
-            Contato contato = repositorioContato.SelecionarRegistroPorId(idParaExcluir);
+            Contato contato = repositorioContato.SelecionarRegistroPorId(id);
 
-            ExcluirContatoViewModel excluirVM = new ExcluirContatoViewModel(idParaExcluir, contato.Nome);
+            ExcluirContatoViewModel excluirVM = new ExcluirContatoViewModel(id, contato.Nome);
 
             return View(excluirVM);
         }
 
-        [HttpPost("Excluir/{idParaExcluir:guid}")]
-        public IActionResult ExclusaoConfirmada(Guid idParaExcluir)
+        [HttpPost("Excluir/{id:guid}")]
+        public IActionResult ExclusaoConfirmada(Guid id)
         {
-            Contato contato = repositorioContato.SelecionarRegistroPorId(idParaExcluir);
+            Contato contato = repositorioContato.SelecionarRegistroPorId(id);
 
-            repositorioContato.Excluir(idParaExcluir);
+            repositorioContato.Excluir(id);
 
             return RedirectToAction(nameof(Index));
         }

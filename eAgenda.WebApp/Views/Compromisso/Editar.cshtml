@@ -1,0 +1,64 @@
+﻿@model EditarCompromissoViewModel
+
+@{
+    ViewBag.Titulo = "Edição de Compromisso";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-8 col-lg-6">
+        <div class ="border rounded-4 gap-2 p-2">
+            <form class="container-fluid mt-3" asp-action="Editar" method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="Assunto">Assunto:</label>
+                    <input class="form-control" asp-for="Assunto" id="Assunto" type="text" value="@Model.Assunto" placeholder="Assunto do compromisso" />
+                    <span asp-validation-for="Assunto" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="Data">Data:</label>
+                    <input class="form-control" asp-for="Data" id="Data" type="date" value="@Model.Data.ToString("yyy-MM-dd")" />
+                    <span asp-validation-for="Data" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="HoraInicio">Horário de Início:</label>
+                    <input class="form-control" asp-for="HoraInicio" id="HoraInicio" type="time" value="@Model.HoraInicio" />
+                    <span asp-validation-for="HoraInicio" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="HoraTermino">Horário de Término:</label>
+                    <input class="form-control" asp-for="HoraTermino" id="HoraTermino" type="time" value="@Model.HoraTermino" />
+                    <span asp-validation-for="HoraTermino" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="Tipo">Tipo:</label>
+                    <select class="form-select" asp-for="Tipo" name="Tipo" asp-items="@Model.TiposDisponiveis"></select>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="Local">Local:</label>
+                    <input class="form-control" asp-for="Local" id="Local" type="text" placeholder="Local do compromisso (caso seja presencial)" value="@Model.Local" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="Link">Link:</label>
+                    <input class="form-control" asp-for="Link" id="Link" type="text" placeholder="Link do compromisso (caso seja remoto)" value="@Model.Link" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="ContatoId">Contato:</label>
+                    <select class="form-select" asp-for="ContatoId" name="ContatoId" asp-items="@Model.ContatosDisponiveis"></select>
+                    <span asp-validation-for="ContatoId" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a class="btn btnVoltar" asp-action="Index">Voltar</a>
+                    <button class="btn btn-success" type="submit">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

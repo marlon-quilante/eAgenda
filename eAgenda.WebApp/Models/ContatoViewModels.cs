@@ -51,10 +51,10 @@ namespace eAgenda.WebApp.Models
         public string Email { get; set; }
 
         [MaxLength(150, ErrorMessage = "A empresa do contato deve conter no máximo 150 caracteres!")]
-        public string Empresa { get; set; }
+        public string? Empresa { get; set; }
 
         [MaxLength(150, ErrorMessage = "O cargo do contato deve conter no máximo 150 caracteres!")]
-        public string Cargo { get; set; }
+        public string? Cargo { get; set; }
 
         public CadastrarContatoViewModel() { }
 
@@ -86,10 +86,10 @@ namespace eAgenda.WebApp.Models
         public string Email { get; set; }
 
         [MaxLength(150, ErrorMessage = "A empresa do contato deve conter no máximo 150 caracteres!")]
-        public string Empresa { get; set; }
+        public string? Empresa { get; set; }
 
         [MaxLength(150, ErrorMessage = "O cargo do contato deve conter no máximo 150 caracteres!")]
-        public string Cargo { get; set; }
+        public string? Cargo { get; set; }
 
         public EditarContatoViewModel() { }
 

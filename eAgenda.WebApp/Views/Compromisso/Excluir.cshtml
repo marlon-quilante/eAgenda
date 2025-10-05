@@ -1,12 +1,12 @@
-﻿@model ExcluirContatoViewModel
+﻿@model ExcluirCompromissoViewModel
 
 @{
-    ViewBag.Titulo = "Exclusão de Contato";
+    ViewBag.Titulo = "Exclusão de Compromisso";
 }
 
 <div class="d-flex justify-content-center">
     <form asp-action="ExclusaoConfirmada" asp-route-id="@Model.Id" method="post">
-        <h3 class="mb-3">Deseja realmente excluir o contato <strong>@Model.Nome</strong>?</h3>
+        <h3 class="mb-3">Deseja realmente excluir o compromisso "<strong>@Model.Assunto</strong>"?</h3>
         <div class="d-flex justify-content-end gap-2">
             <a class="btn btnVoltar" asp-action="Index">Voltar</a>
             <button class="btn btn-danger" type="submit">Excluir</button>

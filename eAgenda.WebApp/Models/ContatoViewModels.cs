@@ -47,7 +47,7 @@ namespace eAgenda.WebApp.Models
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "O email do contato é um campo obrigatório!")]
-        [EmailAddress(ErrorMessage = "O email do contato não está em um formato válido!")]
+        [RegularExpression(@"^(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*)@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,}$", ErrorMessage = "O email do contato não está em um formato válido!")]
         public string Email { get; set; }
 
         [MaxLength(150, ErrorMessage = "A empresa do contato deve conter no máximo 150 caracteres!")]
@@ -82,7 +82,8 @@ namespace eAgenda.WebApp.Models
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "O email do contato é um campo obrigatório!")]
-        [EmailAddress(ErrorMessage = "O email do contato não está em um formato válido!")]
+
+        [RegularExpression(@"^(?:[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-Za-z0-9!#$%&'*+/=?^_`{|}~-]+)*)@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,}$", ErrorMessage = "O email do contato não está em um formato válido!")]
         public string Email { get; set; }
 
         [MaxLength(150, ErrorMessage = "A empresa do contato deve conter no máximo 150 caracteres!")]

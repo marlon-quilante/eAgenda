@@ -27,5 +27,13 @@ namespace eAgenda.Dominio.ModuloCompromisso
             Link = link;
             Contato = contato;
         }
+
+        public bool HorarioDisponivel(DateTime data, Guid id, TimeSpan horaInicio, TimeSpan horaTermino)
+        {
+            if (id != Id && data == Data && ((horaInicio == HoraInicio || horaInicio == HoraTermino || (horaInicio > HoraInicio && horaInicio < HoraTermino))
+                || (horaTermino == HoraInicio || horaTermino == HoraTermino || (horaTermino > HoraInicio && horaTermino < HoraTermino))))
+                return false;
+            return true;
+        }
     }
 }

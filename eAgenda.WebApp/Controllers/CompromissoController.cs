@@ -50,6 +50,17 @@ namespace eAgenda.WebApp.Controllers
                 return View(cadastrarVM);
             }
 
+            foreach (Compromisso c in repositorioCompromisso.SelecionarRegistros())
+            {
+                if (!c.HorarioDisponivel(cadastrarVM.Data, Guid.Empty, cadastrarVM.HoraInicio, cadastrarVM.HoraTermino))
+                {
+                    List<Contato> contatosDisponiveis = repositorioContato.SelecionarRegistros();
+                    cadastrarVM = new CadastrarCompromissoViewModel(contatosDisponiveis);
+
+                    return View(cadastrarVM);
+                }
+            }
+
             Contato contatoSelecionado = repositorioContato.SelecionarRegistroPorId(cadastrarVM.ContatoId.GetValueOrDefault());
             Compromisso novoCompromisso = new Compromisso(cadastrarVM.Assunto, cadastrarVM.Data, cadastrarVM.HoraInicio, cadastrarVM.HoraTermino, cadastrarVM.Tipo, cadastrarVM.Local, cadastrarVM.Link, contatoSelecionado);
 
@@ -89,6 +100,25 @@ namespace eAgenda.WebApp.Controllers
                 editarVM = new EditarCompromissoViewModel(compromisso.Id, compromisso.Assunto, compromisso.Data, compromisso.HoraInicio, compromisso.HoraTermino, compromisso.Local, compromisso.Link, contatosDisponiveis, compromisso.Tipo, compromisso.Contato.Id);
 
                 return View(editarVM);
+            }
+
+            foreach (Compromisso c in repositorioCompromisso.SelecionarRegistros())
+            {
+                if (!c.HorarioDisponivel(editarVM.Data, editarVM.Id, editarVM.HoraInicio, editarVM.HoraTermino))
+                {
+                    List<Contato> contatosDisponiveis = repositorioContato.SelecionarRegistros();
+                    compromisso = repositorioCompromisso.SelecionarRegistroPorId(editarVM.Id);
+
+                    if (compromisso.Contato is null)
+                    {
+                        Contato contato = new Contato();
+                        compromisso.Contato = contato;
+                    }
+
+                    editarVM = new EditarCompromissoViewModel(compromisso.Id, compromisso.Assunto, compromisso.Data, compromisso.HoraInicio, compromisso.HoraTermino, compromisso.Local, compromisso.Link, contatosDisponiveis, compromisso.Tipo, compromisso.Contato.Id);
+
+                    return View(editarVM);
+                }
             }
 
             Compromisso compromissoEditado = new Compromisso(editarVM.Assunto, editarVM.Data, editarVM.HoraInicio, editarVM.HoraTermino, editarVM.Tipo, editarVM.Local, editarVM.Link, contatoSelecionado);

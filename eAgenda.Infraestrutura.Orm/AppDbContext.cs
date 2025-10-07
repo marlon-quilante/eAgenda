@@ -1,5 +1,7 @@
-﻿using eAgenda.Dominio.ModuloCompromisso;
+﻿using eAgenda.Dominio.ModuloCategoria;
+using eAgenda.Dominio.ModuloCompromisso;
 using eAgenda.Dominio.ModuloContato;
+using eAgenda.Infraestrutura.Orm.ModuloCategoria;
 using eAgenda.Infraestrutura.Orm.ModuloCompromisso;
 using eAgenda.Infraestrutura.Orm.ModuloContato;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +12,13 @@ namespace eAgenda.Infraestrutura.Orm
     {
         public DbSet<Contato> Contatos { get; set; }
         public DbSet<Compromisso> Compromissos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new MapeadorContatoEmOrm());
             modelBuilder.ApplyConfiguration(new MapeadorCompromissoEmOrm());
+            modelBuilder.ApplyConfiguration(new MapeadorCategoriaEmOrm());
 
             base.OnModelCreating(modelBuilder);
         }

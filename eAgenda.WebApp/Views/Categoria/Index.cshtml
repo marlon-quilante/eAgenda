@@ -1,0 +1,34 @@
+﻿@model VisualizarCategoriaViewModel
+
+@{
+    ViewBag.Titulo = "Categorias";
+}
+
+<div>
+    <a class="btn btnTema mb-3" asp-action="Cadastrar">
+        <i class="bi bi-plus"></i>
+        Cadastrar
+    </a>
+</div>
+
+<div class="row g-2">
+    @foreach (DetalhesCategoriaViewModel c in Model.Categorias)
+    {
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p class="card-text mb-0"><strong>Titulo: </strong>@c.Titulo</p>
+
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-primary rounded-circle me-2 d-flex justify-content-center align-items-center" style="height: 35px; width: 35px" asp-action="Editar" asp-route-id="@c.Id">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger rounded-circle d-flex justify-content-center align-items-center" style="height: 35px; width: 35px" asp-action="Excluir" asp-route-id="@c.Id">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

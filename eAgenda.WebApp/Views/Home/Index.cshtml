@@ -1,8 +1,27 @@
 ﻿@{
-    ViewBag.Titulo = "Home Page";
+    ViewBag.Titulo = "Página Inicial";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center mb-3">
+    <h1 class="display-4 mb-4">Bem-vindo(a) ao e-Agenda!</h1>
+
+    <p class="fs-6 mb-3">
+        O e-Agenda é o aplicativo perfeito para quem valoriza praticidade e organização no dia a dia. 
+        Com funcionalidades completas, ele permite administrar contatos, compromissos, despesas, categorias e tarefas de maneira fácil e eficiente.
+    </p>
+
+    <p class="fs-6 mb-4">
+        Seja para uso pessoal ou profissional, o e-Agenda é o assistente digital ideal para ajudar você a manter tudo em ordem.
+    </p>
+
+    <div class="d-flex justify-content-center gap-2 mb-3">
+        <a class="btn btnTemaHome" href="/Contatos">Contatos</a>
+        <a class="btn btnTemaHome" href="/Compromissos">Compromissos</a>
+    </div>
+
+    <div class="d-flex justify-content-center gap-2 mb-3">
+        <a class="btn btnTemaHome" href="/Categorias">Categorias</a>
+        <a class="btn btnTemaHome" href="/Despesas">Despesas</a>
+        <a class="btn btnTemaHome" href="/Tarefas">Tarefas</a>
+    </div>
 </div>

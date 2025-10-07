@@ -50,6 +50,19 @@ body {
     color: white;
 }
 
+.btnTemaHome {
+    background-color: transparent;
+    border: solid;
+    border-color: darkorange;
+    color: orange;
+    font-weight: bold;
+    width: 180px;
+    height: 60px;
+    align-content: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
 .btnVoltar {
     background-color: transparent;
     color: black;

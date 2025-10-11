@@ -1,4 +1,5 @@
 ﻿using eAgenda.Dominio.ModuloCategoria;
+using Microsoft.EntityFrameworkCore;
 
 namespace eAgenda.Infraestrutura.Orm.ModuloCategoria
 {
@@ -20,7 +21,10 @@ namespace eAgenda.Infraestrutura.Orm.ModuloCategoria
         public void Editar(Guid idParaEditar, Categoria registroEditado)
         {
             Categoria categoriaAtual = SelecionarRegistroPorId(idParaEditar);
-            
+
+            if (categoriaAtual is null)
+                return;
+
             categoriaAtual.Titulo = registroEditado.Titulo;
             
             context.SaveChanges();
@@ -29,13 +33,17 @@ namespace eAgenda.Infraestrutura.Orm.ModuloCategoria
         public void Excluir(Guid idParaDeletar)
         {
             Categoria categoria = SelecionarRegistroPorId(idParaDeletar);
+
+            if (categoria is null)
+                return;
+
             context.Categorias.Remove(categoria);
             context.SaveChanges();
         }
 
         public Categoria? SelecionarRegistroPorId(Guid id)
         {
-            return context.Categorias.Find(id);
+            return context.Categorias.Include(x => x.Despesas).FirstOrDefault(x => x.Id.Equals(id));
         }
 
         public List<Categoria>? SelecionarRegistros()

@@ -12,6 +12,7 @@ namespace eAgenda.Infraestrutura.Orm.ModuloCategoria
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Titulo).IsRequired().HasMaxLength(100);
+            builder.HasMany(x => x.Despesas).WithMany(d => d.Categorias).UsingEntity(x => x.ToTable("TBCategoria_TBDespesa"));
         }
     }
 }

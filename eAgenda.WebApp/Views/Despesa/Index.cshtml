@@ -1,0 +1,39 @@
+﻿@using eAgenda.Dominio.ModuloCategoria
+@model VisualizarDespesasViewModel
+
+@{
+    ViewBag.Titulo = "Despesas";
+}
+
+<div>
+    <a class="btn btnTema mb-3" asp-action="Cadastrar">
+        <i class="bi bi-plus"></i>
+        Cadastrar
+    </a>
+</div>
+
+<div class="row g-2">
+    @foreach (DetalhesDespesaViewModel d in Model.Despesas)
+    {
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p class="card-text mb-0"><strong>Descrição: </strong>@d.Descricao</p>
+                    <p class="card-text mb-0"><strong>Data: </strong>@d.DataOcorrencia.ToShortDateString()</p>
+                    <p class="card-text mb-0"><strong>Valor: </strong>@d.Valor</p>
+                    <p class="card-text mb-0"><strong>Forma de pagamento: </strong>@d.FormaPagamento</p>
+                    <p class="card-text mb-0"><strong>Categorias: </strong>@string.Join(", ", d.Categorias.Select(x => x.Titulo))</p>
+
+                    <div class="d-flex justify-content-end">
+                        <a class="btn btn-primary rounded-circle me-2 d-flex justify-content-center align-items-center" style="height: 35px; width: 35px" asp-action="Editar" asp-route-id="@d.Id">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger rounded-circle d-flex justify-content-center align-items-center" style="height: 35px; width: 35px" asp-action="Excluir" asp-route-id="@d.Id">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

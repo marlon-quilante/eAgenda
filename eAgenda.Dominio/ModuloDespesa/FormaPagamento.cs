@@ -4,9 +4,9 @@ namespace eAgenda.Dominio.ModuloDespesa
 {
     public enum FormaPagamento
     {
-        Pix,
-        Dinheiro,
-        Credito,
-        Debito
+        [Display(Name = "Pix")] Pix,
+        [Display(Name = "Dinheiro")] Dinheiro,
+        [Display(Name = "Cartão de Crédito")] Credito,
+        [Display(Name = "Cartão de Débito")] Debito
     }
 }

@@ -86,5 +86,15 @@ namespace eAgenda.WebApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet("Despesas/{id:guid}")]
+        public IActionResult Despesas(Guid id)
+        {
+            Categoria categoria = repositorioCategoria.SelecionarRegistroPorId(id);
+
+            DespesasCategoriaViewModel despesasCategoriaVM = new DespesasCategoriaViewModel(categoria.Id, categoria.Titulo, categoria.Despesas);
+
+            return View(despesasCategoriaVM);
+        }
     }
 }

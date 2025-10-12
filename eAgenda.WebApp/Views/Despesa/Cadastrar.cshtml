@@ -1,4 +1,5 @@
 ﻿@using eAgenda.Dominio.ModuloCategoria
+@using eAgenda.Dominio.ModuloDespesa
 @model CadastrarDespesaViewModel
 
 @{
@@ -29,18 +30,20 @@
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="FormaPagamento">Forma de Pagamento:</label>
-                    <select class="form-select" asp-for="FormaPagamento" id="FormaPagamento" asp-items="@Model.FormasPagamentoDisponiveis"></select>
+                    <select class="form-select" asp-for="FormaPagamento" id="FormaPagamento" asp-items="@Html.GetEnumSelectList<FormaPagamento>()"></select>
                     <span asp-validation-for="FormaPagamento" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="CategoriasSelecionadas">Categorias:</label>
-                    <div class="mb-3">
+                    <div class="mb-3 d-flex gap-3">
                         @foreach (Categoria c in Model.CategoriasDisponiveis)
                         {
-                            <input class="form-check-input" name="CategoriasSelecionadas" type="checkbox" value="@c.Id" 
-                            @(Model.CategoriasSelecionadas != null && Model.CategoriasSelecionadas.Contains(c.Id) ? "checked" : "") />
-                            <label class="form-check-label fw-bold">@c.Titulo</label>
+                            <div>
+                                <input class="form-check-input" name="CategoriasSelecionadas" type="checkbox" value="@c.Id"
+                                       @(Model.CategoriasSelecionadas != null && Model.CategoriasSelecionadas.Contains(c.Id) ? "checked" : "") />
+                                <label class="form-check-label">@c.Titulo</label>
+                            </div>
                         }
                     </div>
                     <span asp-validation-for="CategoriasSelecionadas" class="text-danger"></span>

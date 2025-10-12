@@ -60,9 +60,6 @@ namespace eAgenda.WebApp.Models
         public FormaPagamento FormaPagamento { get; set; }
 
         [ValidateNever]
-        public List<SelectListItem> FormasPagamentoDisponiveis { get; set; }
-
-        [ValidateNever]
         public List<Categoria> CategoriasDisponiveis { get; set; }
 
         [ValidateNever]
@@ -73,7 +70,6 @@ namespace eAgenda.WebApp.Models
         public CadastrarDespesaViewModel(List<Categoria> categorias)
         {
             CategoriasDisponiveis = categorias.Select(x => new Categoria(x.Id, x.Titulo)).ToList();
-            FormasPagamentoDisponiveis = Enum.GetValues(typeof(FormaPagamento)).Cast<FormaPagamento>().Select(x => new SelectListItem(x.ToString(), ((int)x).ToString())).ToList();
             CategoriasSelecionadas = new List<Guid>();
         }
 
@@ -103,9 +99,6 @@ namespace eAgenda.WebApp.Models
         public FormaPagamento FormaPagamento { get; set; }
 
         [ValidateNever]
-        public List<SelectListItem> FormasPagamentoDisponiveis { get; set; }
-
-        [ValidateNever]
         public List<Categoria> CategoriasDisponiveis { get; set; }
 
         [ValidateNever]
@@ -120,8 +113,7 @@ namespace eAgenda.WebApp.Models
             DataOcorrencia = dataOcorrencia;
             Valor = valor;
 
-            CategoriasDisponiveis = categoriasDisponiveis.Select(x => new Categoria(x.Id, x.Titulo)).ToList();
-            FormasPagamentoDisponiveis = Enum.GetValues(typeof(FormaPagamento)).Cast<FormaPagamento>().Select(x => new SelectListItem(x.ToString(), ((int)x).ToString())).ToList();
+            CategoriasDisponiveis = categoriasDisponiveis.Select(x => new Categoria(x.Id, x.Titulo)).ToList();            
             CategoriasSelecionadas = categoriasSelecionadas.Select(x => x.Id).ToList();
         }
     }

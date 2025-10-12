@@ -48,7 +48,7 @@ namespace eAgenda.Infraestrutura.Orm.ModuloCategoria
 
         public List<Categoria>? SelecionarRegistros()
         {
-            return context.Categorias.ToList();
+            return context.Categorias.Include(x => x.Despesas).ToList();
         }
     }
 }

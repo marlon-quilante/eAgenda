@@ -1,4 +1,5 @@
 ﻿using eAgenda.Dominio.ModuloCategoria;
+using eAgenda.Dominio.ModuloDespesa;
 using System.ComponentModel.DataAnnotations;
 
 namespace eAgenda.WebApp.Models
@@ -7,14 +8,14 @@ namespace eAgenda.WebApp.Models
     {
         public List<DetalhesCategoriaViewModel> Categorias { get; set; }
 
-        public VisualizarCategoriaViewModel() 
+        public VisualizarCategoriaViewModel()
         {
             Categorias = new List<DetalhesCategoriaViewModel>();
         }
 
         public VisualizarCategoriaViewModel(List<Categoria> categorias)
         {
-            Categorias = categorias.Select(x => new DetalhesCategoriaViewModel(x.Id, x.Titulo)).ToList();
+            Categorias = categorias.Select(x => new DetalhesCategoriaViewModel(x.Id, x.Titulo, x.Despesas.Count())).ToList();
         }
     }
 
@@ -22,13 +23,15 @@ namespace eAgenda.WebApp.Models
     {
         public Guid Id { get; set; }
         public string Titulo { get; set; }
+        public int QtdDespesas { get; set; }
 
         public DetalhesCategoriaViewModel() { }
 
-        public DetalhesCategoriaViewModel(Guid id, string titulo)
+        public DetalhesCategoriaViewModel(Guid id, string titulo, int qtdDespesas)
         {
             Id = id;
             Titulo = titulo;
+            QtdDespesas = qtdDespesas;
         }
     }
 
@@ -63,7 +66,7 @@ namespace eAgenda.WebApp.Models
         }
     }
 
-    public class ExcluirCategoriaViewModel 
+    public class ExcluirCategoriaViewModel
     {
         public Guid Id { get; set; }
         public string Titulo { get; set; }
@@ -74,6 +77,24 @@ namespace eAgenda.WebApp.Models
         {
             Id = id;
             Titulo = titulo;
+        }
+    }
+
+    public class DespesasCategoriaViewModel
+    {
+        public Guid Id { get; set; }
+        public string Titulo { get; set; }
+        public List<DetalhesDespesaViewModel> Despesas { get; set; }
+        public decimal ValorTotal { get; set; }
+
+        public DespesasCategoriaViewModel() { }
+
+        public DespesasCategoriaViewModel(Guid id, string titulo, List<Despesa> despesas)
+        {
+            Id = id;
+            Titulo = titulo;
+            Despesas = despesas.Select(x => new DetalhesDespesaViewModel(x.Id, x.Descricao, x.DataOcorrencia, x.Valor, x.FormaPagamento.ToString(), x.Categorias)).ToList();
+            ValorTotal = Despesas.Select(x => x.Valor).Sum();
         }
     }
 }

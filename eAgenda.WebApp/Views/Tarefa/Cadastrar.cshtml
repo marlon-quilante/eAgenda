@@ -1,0 +1,31 @@
+﻿@using eAgenda.Dominio.ModuloTarefa
+@model CadastrarTarefaViewModel
+
+@{
+    ViewBag.Titulo = "Cadastro de Tarefa";
+}
+
+<div class="d-flex justify-content-center">
+    <div class="col-sm-8 col-lg-6">
+        <div class="border rounded-4 gap-2 p-2" style="background-color:white">
+            <form class="container-fluid mt-3" asp-action="Cadastrar" method="post">
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="Titulo">Título:</label>
+                    <input class="form-control" asp-for="Titulo" id="Titulo" type="text" placeholder="Título da tarefa" />
+                    <span asp-validation-for="Titulo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold" asp-for="Prioridade">Prioridade:</label>
+                    <select class="form-control" asp-for="Prioridade" id="Prioridade" type="text" asp-items="@Html.GetEnumSelectList<PrioridadeTarefa>()"></select>
+                    <span asp-validation-for="Prioridade" class="text-danger"></span>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <a class="btn btnVoltar" asp-action="Index">Voltar</a>
+                    <button class="btn btn-success" type="submit">Continuar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

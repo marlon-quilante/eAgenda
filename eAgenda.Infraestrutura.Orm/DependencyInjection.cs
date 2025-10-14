@@ -2,6 +2,7 @@
 using eAgenda.Infraestrutura.Orm.ModuloCompromisso;
 using eAgenda.Infraestrutura.Orm.ModuloContato;
 using eAgenda.Infraestrutura.Orm.ModuloDespesa;
+using eAgenda.Infraestrutura.Orm.ModuloTarefa;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,8 @@ namespace eAgenda.Infraestrutura.Orm
             services.AddScoped<IRepositorioCompromisso, RepositorioCompromisso>();
             services.AddScoped<IRepositorioCategoria, RepositorioCategoria>();
             services.AddScoped<IRepositorioDespesa, RepositorioDespesa>();
+            services.AddScoped<IRepositorioTarefa, RepositorioTarefa>();
+            services.AddScoped<IRepositorioItemTarefa, RepositorioItemTarefa>();
 
             return services;
         }

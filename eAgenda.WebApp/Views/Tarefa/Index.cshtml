@@ -1,0 +1,68 @@
+﻿@model VisualizarTarefasViewModel
+
+@{
+    ViewBag.Titulo = "Tarefas";
+}
+
+<div>
+    <a class="btn btnTema mb-3" asp-action="Cadastrar">
+        <i class="bi bi-plus"></i>
+        Cadastrar
+    </a>
+</div>
+
+<div class="row g-2">
+    @foreach (DetalhesTarefaViewModel t in Model.Tarefas)
+    {
+        <div class="col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p class="card-text mb-0"><strong>Título: </strong>@t.Titulo</p>
+                    <p class="card-text mb-0"><strong>Prioridade: </strong>@t.Prioridade</p>
+                    <p class="card-text mb-0"><strong>Data de Criação: </strong>@t.DataCriacao</p>
+                    <p class="card-text mb-0"><strong>Percentual de Conclusão: </strong>@t.PercentualConclusao.ToString("F2") %</p>
+
+                    @if (t.DataConclusao is not null)
+                    {
+                        <p class="card-text mb-0"><strong>Data de Conclusão: </strong>@t.DataConclusao</p>
+                    }
+
+                    <div class="d-flex justify-content-start mt-2">
+                        @if (t.PercentualConclusao == 100 && t.StatusConclusao == false)
+                        {
+                            <form asp-action="Concluir" method="post" asp-route-id="@t.Id">
+                                <button class="btn btn-success rounded-circle me-2 d-flex justify-content-center align-items-center" title="Concluir" style="height: 35px; width: 35px" type="submit">
+                                    <i class="bi bi-check-lg"></i>
+                                </button>
+                            </form>
+                        }
+                        else if (t.PercentualConclusao < 100)
+                        {
+                            <div class="btn btn-success rounded-circle me-2 d-flex justify-content-center align-items-center disabled" style="height: 35px; width: 35px">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+                        }
+                        else if (t.StatusConclusao == true)
+                        {
+                            <form asp-action="DesfazerConclusao" method="post" asp-route-id="@t.Id">
+                                <button class="btn btn-warning rounded-circle me-2 d-flex justify-content-center align-items-center" title="Desfazer conclusão" style="height: 35px; width: 35px" type="submit">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                            </form>
+                        }
+
+                        <a class="btn btn-secondary rounded-circle me-2 d-flex justify-content-center align-items-center" title="Itens da tarefa" style="height: 35px; width: 35px" asp-action="ItensTarefa" asp-route-idTarefa="@t.Id">
+                            <i class="bi bi-card-checklist"></i>
+                        </a>
+                        <a class="btn btn-primary rounded-circle me-2 d-flex justify-content-center align-items-center" title="Editar" style="height: 35px; width: 35px" asp-action="Editar" asp-route-id="@t.Id">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+                        <a class="btn btn-danger rounded-circle d-flex justify-content-center align-items-center" title="Excluir" style="height: 35px; width: 35px" asp-action="Excluir" asp-route-id="@t.Id">
+                            <i class="bi bi-trash"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

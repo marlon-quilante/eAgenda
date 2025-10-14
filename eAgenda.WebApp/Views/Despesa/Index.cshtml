@@ -23,7 +23,7 @@
                     <p class="card-text mb-0"><strong>Valor: </strong>@d.Valor.ToString("C2")</p>
                     <p class="card-text mb-0"><strong>Categorias: </strong>@string.Join(", ", d.Categorias.Select(x => x.Titulo))</p>
 
-                    <div class="d-flex justify-content-end">
+                    <div class="d-flex justify-content-start mt-2">
                         <a class="btn btn-primary rounded-circle me-2 d-flex justify-content-center align-items-center" title="Editar" style="height: 35px; width: 35px" asp-action="Editar" asp-route-id="@d.Id">
                             <i class="bi bi-pencil"></i>
                         </a>

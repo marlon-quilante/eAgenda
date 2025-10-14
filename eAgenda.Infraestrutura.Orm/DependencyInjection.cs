@@ -17,7 +17,7 @@ namespace eAgenda.Infraestrutura.Orm
             {
                 var connectionString = configuration["SQL_CONNECTION_STRING"];
 
-                opt.UseSqlServer(connectionString);
+                opt.UseSqlServer(connectionString, options => options.EnableRetryOnFailure(3));
             });
 
             services.AddScoped<IRepositorioContato, RepositorioContato>();

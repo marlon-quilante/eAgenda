@@ -1,4 +1,5 @@
 using eAgenda.Infraestrutura.Orm;
+using eAgenda.WebApp.Config;
 
 namespace eAgenda.WebApp
 {
@@ -14,6 +15,8 @@ namespace eAgenda.WebApp
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            app.ApplyMigrations();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36408.4 d17.14
+VisualStudioVersion = 17.14.36408.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.WebApp", "eAgenda.WebApp\eAgenda.WebApp.csproj", "{1EBA0F40-EE34-4B4D-8D7F-21F1AEEF6BB0}"
 EndProject
@@ -14,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Infraestrutura.Orm", "eAgenda.Infraestrutura.Orm\eAgenda.Infraestrutura.Orm.csproj", "{15716C57-A836-43DF-8B24-F2DDD435CCFF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Dominio", "eAgenda.Dominio\eAgenda.Dominio.csproj", "{CB1291F8-E0D0-4C7A-9FA5-4671C634D375}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testes", "Testes", "{A4A3E400-00F4-4EAD-970D-A024AA209C5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Testes.Integracao", "eAgenda.Testes.Integracao\eAgenda.Testes.Integracao.csproj", "{E29BB986-4128-4D7F-BB63-7B6AF4B16E13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,10 @@ Global
 		{CB1291F8-E0D0-4C7A-9FA5-4671C634D375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB1291F8-E0D0-4C7A-9FA5-4671C634D375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB1291F8-E0D0-4C7A-9FA5-4671C634D375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29BB986-4128-4D7F-BB63-7B6AF4B16E13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29BB986-4128-4D7F-BB63-7B6AF4B16E13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29BB986-4128-4D7F-BB63-7B6AF4B16E13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29BB986-4128-4D7F-BB63-7B6AF4B16E13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{1EBA0F40-EE34-4B4D-8D7F-21F1AEEF6BB0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{15716C57-A836-43DF-8B24-F2DDD435CCFF} = {40AE662A-EC0C-4254-B84D-64ABBC75E7A6}
 		{CB1291F8-E0D0-4C7A-9FA5-4671C634D375} = {2EDCDC68-D851-42B6-B6CE-1D3074226A4D}
+		{E29BB986-4128-4D7F-BB63-7B6AF4B16E13} = {A4A3E400-00F4-4EAD-970D-A024AA209C5C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {06F9AC74-E28D-424B-8B17-5A314A290102}

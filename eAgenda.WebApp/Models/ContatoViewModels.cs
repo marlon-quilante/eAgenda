@@ -43,7 +43,7 @@ namespace eAgenda.WebApp.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O telefone do contato é um campo obrigatório!")]
-        [Phone(ErrorMessage = "O telefone do contato não está em um formato válido!")]
+        [RegularExpression(@"^\(\d{2}\)\s{1}\d{5}\-\d{4}$", ErrorMessage = "O telefone deve estar no formato (99) 99999-9999")]
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "O email do contato é um campo obrigatório!")]
@@ -78,7 +78,7 @@ namespace eAgenda.WebApp.Models
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "O telefone do contato é um campo obrigatório!")]
-        [Phone(ErrorMessage = "O telefone do contato não está em um formato válido!")]
+        [RegularExpression(@"^\(\d{2}\)\s{1}\d{5}\-\d{4}$", ErrorMessage = "O telefone deve estar no formato (99) 99999-9999")]
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "O email do contato é um campo obrigatório!")]

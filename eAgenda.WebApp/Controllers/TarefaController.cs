@@ -1,4 +1,6 @@
-﻿using eAgenda.Dominio.ModuloTarefa;
+﻿using eAgenda.Dominio.ModuloContato;
+using eAgenda.Dominio.ModuloTarefa;
+using eAgenda.Infraestrutura.Orm.ModuloContato;
 using eAgenda.Infraestrutura.Orm.ModuloTarefa;
 using eAgenda.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +20,21 @@ namespace eAgenda.WebApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(string? status, string? prioridade)
         {
-            List<Tarefa> tarefas = repositorioTarefa.SelecionarRegistros();
+            List<Tarefa> tarefas;
+
+            switch (status)
+            {
+                case "Pendentes": tarefas = repositorioTarefa.SelecionarRegistros().Where(x => x.StatusConclusao == false).ToList(); break;
+                case "Concluídas": tarefas = repositorioTarefa.SelecionarRegistros().Where(x => x.StatusConclusao == true).ToList(); break;
+                default: tarefas = repositorioTarefa.SelecionarRegistros(); break;
+            }
 
             VisualizarTarefasViewModel visualizarVM = new VisualizarTarefasViewModel(tarefas);
+
+            ViewBag.StatusAtual = status ?? "Todas";
+            ViewBag.PrioridadeAtual = prioridade ?? "Todas";
 
             return View(visualizarVM);
         }

@@ -9,6 +9,24 @@
         <i class="bi bi-plus"></i>
         Cadastrar
     </a>
+
+    <div class="d-flex mb-3">
+        <div class="row">
+            <label class="form-label mb-0">Status</label>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                    @(ViewBag.StatusAtual == "Pendentes" ? "Pendentes" :
+                                        ViewBag.StatusAtual == "Concluídas" ? "Concluídas" :
+                                        "Todas")
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" asp-action="Index">Todas</a></li>
+                    <li><a class="dropdown-item" asp-action="Index" asp-route-status="Pendentes">Pendentes</a></li>
+                    <li><a class="dropdown-item" asp-action="Index" asp-route-status="Concluídas">Concluídas</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row g-2">

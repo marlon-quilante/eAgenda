@@ -1,4 +1,5 @@
 ﻿using eAgenda.Dominio.ModuloContato;
+using Microsoft.EntityFrameworkCore;
 
 namespace eAgenda.Infraestrutura.Orm.ModuloContato
 {
@@ -46,12 +47,12 @@ namespace eAgenda.Infraestrutura.Orm.ModuloContato
 
         public Contato? SelecionarRegistroPorId(Guid id)
         {
-            return context.Contatos.Find(id);
+            return context.Contatos.Include(x => x.Compromissos).FirstOrDefault(x => x.Id.Equals(id));
         }
 
         public List<Contato> SelecionarRegistros()
         {
-            return context.Contatos.ToList();
+            return context.Contatos.Include(x => x.Compromissos).ToList();
         }
     }
 }

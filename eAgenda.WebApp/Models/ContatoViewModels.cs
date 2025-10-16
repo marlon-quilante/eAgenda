@@ -1,4 +1,6 @@
-﻿using eAgenda.Dominio.ModuloContato;
+﻿using eAgenda.Dominio.ModuloCategoria;
+using eAgenda.Dominio.ModuloCompromisso;
+using eAgenda.Dominio.ModuloContato;
 using System.ComponentModel.DataAnnotations;
 
 namespace eAgenda.WebApp.Models
@@ -9,7 +11,7 @@ namespace eAgenda.WebApp.Models
 
         public VisualizarContatosViewModel(List<Contato> contatos)
         {
-            Contatos = contatos.Select(x => new DetalhesContatoViewModel(x.Id, x.Nome, x.Telefone, x.Email, x.Empresa, x.Cargo)).ToList();
+            Contatos = contatos.Select(x => new DetalhesContatoViewModel(x.Id, x.Nome, x.Telefone, x.Email, x.Empresa, x.Cargo, x.Compromissos)).ToList();
         }
     }
 
@@ -21,10 +23,11 @@ namespace eAgenda.WebApp.Models
         public string Email { get; set; }
         public string Empresa { get; set; }
         public string Cargo { get; set; }
+        public List<Compromisso> Compromissos { get; set; }
 
         public DetalhesContatoViewModel() { }
 
-        public DetalhesContatoViewModel(Guid id, string nome, string telefone, string email, string empresa, string cargo)
+        public DetalhesContatoViewModel(Guid id, string nome, string telefone, string email, string empresa, string cargo, List<Compromisso> compromissos)
         {
             Id = id;
             Nome = nome;
@@ -32,6 +35,7 @@ namespace eAgenda.WebApp.Models
             Email = email;
             Empresa = empresa;
             Cargo = cargo;
+            Compromissos = compromissos;
         }
     }
 

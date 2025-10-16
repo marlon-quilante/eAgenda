@@ -10,7 +10,7 @@ namespace eAgenda.Dominio.ModuloContato
         public string Email { get; set; }
         public string Empresa { get; set; }
         public string Cargo { get; set; }
-        public List<Compromisso> Compromissos { get; set; }
+        public List<Compromisso> Compromissos { get; set; } = new List<Compromisso>();
 
         public Contato() { }
 

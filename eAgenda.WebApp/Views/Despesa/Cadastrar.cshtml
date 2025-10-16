@@ -37,13 +37,20 @@
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="CategoriasSelecionadas">Categorias:</label>
                     <div class="mb-3 d-flex gap-3">
-                        @foreach (Categoria c in Model.CategoriasDisponiveis)
+                        @if (!Model.CategoriasDisponiveis.Any())
                         {
-                            <div>
-                                <input class="form-check-input" name="CategoriasSelecionadas" type="checkbox" value="@c.Id"
-                                       @(Model.CategoriasSelecionadas != null && Model.CategoriasSelecionadas.Contains(c.Id) ? "checked" : "") />
-                                <label class="form-check-label">@c.Titulo</label>
-                            </div>
+                            <p>Não há categorias disponíveis! Cadastre uma categoria para prosseguir com o registro da despesa...</p>
+                        }
+                        else
+                        {
+                            @foreach (Categoria c in Model.CategoriasDisponiveis)
+                            {
+                                <div>
+                                    <input class="form-check-input" name="CategoriasSelecionadas" type="checkbox" value="@c.Id"
+                                           @(Model.CategoriasSelecionadas != null && Model.CategoriasSelecionadas.Contains(c.Id) ? "checked" : "") />
+                                    <label class="form-check-label">@c.Titulo</label>
+                                </div>
+                            }
                         }
                     </div>
                     <span asp-validation-for="CategoriasSelecionadas" class="text-danger"></span>
@@ -51,7 +58,14 @@
 
                 <div class="d-flex justify-content-end gap-2">
                     <a class="btn btnVoltar" asp-action="Index">Voltar</a>
-                    <button class="btn btn-success" type="submit">Salvar</button>
+                    @if (!Model.CategoriasDisponiveis.Any())
+                    {
+                        <button class="btn btn-success disabled" type="submit">Salvar</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success" type="submit">Salvar</button>
+                    }
                 </div>
             </form>
         </div>

@@ -7,8 +7,22 @@ namespace eAgenda.Testes.Integracao.ModuloContato
     [TestClass]
     public sealed class RepositorioContatoTestes
     {
-        private static readonly AppDbContext context = AppDbContextFactory.CriarDbContext("Data source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=eAgenda;Integrated Security=True;");
+        private static readonly AppDbContext context = AppDbContextFactory.CriarDbContext("Data source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=eAgendaTest;Integrated Security=True;");
         private static RepositorioContato repositorioContato = new RepositorioContato(context);
+
+        [TestInitialize]
+        public void ConfigurarTestes()
+        {
+            context.Database.EnsureCreated();
+
+            context.Tarefas.RemoveRange(context.Tarefas);
+            context.Despesas.RemoveRange(context.Despesas);
+            context.Categorias.RemoveRange(context.Categorias);
+            context.Compromissos.RemoveRange(context.Compromissos);
+            context.Contatos.RemoveRange(context.Contatos);
+
+            context.SaveChanges();
+        }
 
         [TestMethod]
         public void Deve_CadastrarRegistro_ComSucesso()

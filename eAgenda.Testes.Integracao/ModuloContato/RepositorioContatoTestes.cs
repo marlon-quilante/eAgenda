@@ -1,37 +1,20 @@
 ﻿using eAgenda.Dominio.ModuloContato;
-using eAgenda.Infraestrutura.Orm;
-using eAgenda.Infraestrutura.Orm.ModuloContato;
+using eAgenda.Testes.Integracao.Compartilhado;
 
 namespace eAgenda.Testes.Integracao.ModuloContato
 {
     [TestClass]
-    public sealed class RepositorioContatoTestes
+    public sealed class RepositorioContatoTestes : TestFixture
     {
-        private static readonly AppDbContext context = AppDbContextFactory.CriarDbContext("Data source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=eAgendaTest;Integrated Security=True;");
-        private static RepositorioContato repositorioContato = new RepositorioContato(context);
-
-        [TestInitialize]
-        public void ConfigurarTestes()
-        {
-            context.Database.EnsureCreated();
-
-            context.Tarefas.RemoveRange(context.Tarefas);
-            context.Despesas.RemoveRange(context.Despesas);
-            context.Categorias.RemoveRange(context.Categorias);
-            context.Compromissos.RemoveRange(context.Compromissos);
-            context.Contatos.RemoveRange(context.Contatos);
-
-            context.SaveChanges();
-        }
-
         [TestMethod]
+        [TestCategory("Testes de Integração de Contatos")]
         public void Deve_CadastrarRegistro_ComSucesso()
         {
             Contato contato = new Contato("Teste", "(49) 99999-9999", "teste@teste.com", "Empresa Teste", "Cargo Teste");
 
-            repositorioContato.Cadastrar(contato);
+            repositorioContato?.Cadastrar(contato);
 
-            Contato? contatoSelecionado = repositorioContato.SelecionarRegistroPorId(contato.Id);
+            Contato? contatoSelecionado = repositorioContato?.SelecionarRegistroPorId(contato.Id);
 
             // Asserção
             Assert.AreEqual(contato, contatoSelecionado);
@@ -42,9 +25,9 @@ namespace eAgenda.Testes.Integracao.ModuloContato
         {
             Contato contato = new Contato("Teste", "(49) 99999-9999", "teste@teste.com", "Empresa Teste", "Cargo Teste");
 
-            repositorioContato.Cadastrar(contato);
+            repositorioContato?.Cadastrar(contato);
 
-            Contato? contatoSelecionado = repositorioContato.SelecionarRegistroPorId(Guid.NewGuid());
+            Contato? contatoSelecionado = repositorioContato?.SelecionarRegistroPorId(Guid.NewGuid());
 
             // Asserção
             Assert.AreNotEqual(contato, contatoSelecionado);
@@ -58,16 +41,16 @@ namespace eAgenda.Testes.Integracao.ModuloContato
             // Arranjo
             Contato contatoOriginal = new Contato("Teste", "(49) 99999-9999", "teste@teste.com", "Empresa Teste", "Cargo Teste");
 
-            repositorioContato.Cadastrar(contatoOriginal);
+            repositorioContato?.Cadastrar(contatoOriginal);
 
             Contato contatoEditado = new Contato("Teste Editado", "(49) 11111-1111", "testeeditado@teste.com", "Empresa Teste Editada", "Cargo Teste Editado");
             contatoEditado.Id = contatoOriginal.Id;
 
             // Ação
-            repositorioContato.Editar(contatoOriginal.Id, contatoEditado);
+            repositorioContato?.Editar(contatoOriginal.Id, contatoEditado);
 
             // Asserção
-            Contato? contatoSelecionado = repositorioContato.SelecionarRegistroPorId(contatoOriginal.Id);
+            Contato? contatoSelecionado = repositorioContato?.SelecionarRegistroPorId(contatoOriginal.Id);
 
             Assert.AreEqual(contatoOriginal, contatoSelecionado);
         }
@@ -78,12 +61,12 @@ namespace eAgenda.Testes.Integracao.ModuloContato
             // Arranjo
             Contato contatoOriginal = new Contato("Teste", "(49) 99999-9999", "teste@teste.com", "Empresa Teste", "Cargo Teste");
 
-            repositorioContato.Cadastrar(contatoOriginal);
+            repositorioContato?.Cadastrar(contatoOriginal);
             // Ação
-            repositorioContato.Excluir(contatoOriginal.Id);
+            repositorioContato?.Excluir(contatoOriginal.Id);
 
             // Asserção
-            Contato? contatoSelecionado = repositorioContato.SelecionarRegistroPorId(contatoOriginal.Id);
+            Contato? contatoSelecionado = repositorioContato?.SelecionarRegistroPorId(contatoOriginal.Id);
 
             Assert.IsNull(contatoSelecionado);
         }

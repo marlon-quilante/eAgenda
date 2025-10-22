@@ -48,5 +48,31 @@ namespace eAgenda.Testes.Integracao.ModuloCompromisso
 
             Assert.AreEqual(compromisso, compromissoSelecionado);
         }
+
+        [TestMethod]
+        public void Deve_EditarRegistro_ComSucesso()
+        {
+            // Arrange - Arranjo
+            Contato contato = Builder<Contato>.CreateNew().With(c => c.Id = Guid.NewGuid()).Build();
+
+            TimeSpan horaInicio = DateTime.Now.TimeOfDay;
+            TimeSpan horaTermino = horaInicio.Add(TimeSpan.FromHours(1));
+
+            Compromisso compromissoOriginal = new Compromisso("Assunto Teste", DateTime.Now, horaInicio, horaTermino, TipoCompromisso.Presencial, "Local teste", null, contato);
+            compromissoOriginal.Id = Guid.NewGuid();
+
+            repositorioCompromisso?.Cadastrar(compromissoOriginal);
+
+            Compromisso compromissoEditado = new Compromisso("Assunto Teste Editado", DateTime.Now, horaInicio, horaTermino, TipoCompromisso.Remoto, null, "Link teste", contato);
+            compromissoEditado.Id = compromissoOriginal.Id;
+
+            // Act - Ação
+            repositorioCompromisso?.Editar(compromissoOriginal.Id, compromissoEditado);
+
+            // Assert - Asserção
+            Compromisso? compromissoSelecionado = repositorioCompromisso?.SelecionarRegistroPorId(compromissoOriginal.Id);
+
+            Assert.AreEqual(compromissoOriginal, compromissoSelecionado);
+        }
     }
 }

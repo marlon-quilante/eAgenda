@@ -24,6 +24,22 @@ namespace eAgenda.Testes.Integracao.ModuloCategoria
         }
 
         [TestMethod]
+        public void Deve_RetornarNull_AoSelecionar_IdErrado()
+        {
+            // Arranjo
+            Categoria categoria = new Categoria("Categoria teste");
+            categoria.Id = Guid.NewGuid();
+
+            repositorioCategoria?.Cadastrar(categoria);
+
+            // Ação
+            Categoria? categoriaSelecionada = repositorioCategoria?.SelecionarRegistroPorId(Guid.NewGuid());
+
+            // Asserção
+            Assert.IsNull(categoriaSelecionada);
+        }
+
+        [TestMethod]
         public void Deve_EditarRegistro_ComSucesso()
         {
             // Arranjo

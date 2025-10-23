@@ -14,7 +14,6 @@ namespace eAgenda.Testes.Integracao.ModuloTarefa
         public void Deve_CadastrarRegistro_ComSucesso()
         {
             // Arrange
-
             Tarefa tarefa = new Tarefa("Tarefa Teste", PrioridadeTarefa.Baixa);
 
             // Act
@@ -30,7 +29,6 @@ namespace eAgenda.Testes.Integracao.ModuloTarefa
         public void Deve_EditarRegistro_ComSucesso()
         {
             // Arrange
-
             Tarefa tarefaOriginal = new Tarefa("Tarefa Teste", PrioridadeTarefa.Baixa);
 
             repositorioTarefa?.Cadastrar(tarefaOriginal);
@@ -50,7 +48,6 @@ namespace eAgenda.Testes.Integracao.ModuloTarefa
         public void Deve_ExcluirRegistro_ComSucesso()
         {
             // Arrange
-
             Tarefa tarefa = new Tarefa("Tarefa Teste", PrioridadeTarefa.Baixa);
 
             // Act
@@ -90,7 +87,6 @@ namespace eAgenda.Testes.Integracao.ModuloTarefa
         public void Deve_SelecionarTarefasPendentes_ComSucesso()
         {
             // Arrange
-
             Tarefa tarefa = new Tarefa("Tarefa Teste", PrioridadeTarefa.Baixa);
             Tarefa tarefa2 = new Tarefa("Tarefa Teste 2", PrioridadeTarefa.Normal);
             Tarefa tarefa3 = new Tarefa("Tarefa Teste 3", PrioridadeTarefa.Alta);
@@ -109,6 +105,25 @@ namespace eAgenda.Testes.Integracao.ModuloTarefa
 
             Assert.IsTrue(tarefasSelecionadas?.All(t => t.StatusConclusao == false));
             CollectionAssert.AreNotEqual(tarefasOriginais, tarefasSelecionadas);
+        }
+
+        [TestMethod]
+        public void Deve_SelecionarTarefas_ComSucesso()
+        {
+            // Arrange
+            Tarefa tarefa = new Tarefa("Tarefa Teste", PrioridadeTarefa.Baixa);
+            Tarefa tarefa2 = new Tarefa("Tarefa Teste 2", PrioridadeTarefa.Normal);
+            Tarefa tarefa3 = new Tarefa("Tarefa Teste 3", PrioridadeTarefa.Alta);
+
+            repositorioTarefa?.Cadastrar(tarefa);
+            repositorioTarefa?.Cadastrar(tarefa2);
+            repositorioTarefa?.Cadastrar(tarefa3);
+
+            // Act
+            List<Tarefa>? tarefasSelecionadas = repositorioTarefa?.SelecionarRegistros();
+
+            // Assert
+            CollectionAssert.AllItemsAreNotNull(tarefasSelecionadas);
         }
     }
 }

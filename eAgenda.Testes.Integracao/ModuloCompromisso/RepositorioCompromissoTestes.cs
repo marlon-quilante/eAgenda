@@ -74,5 +74,28 @@ namespace eAgenda.Testes.Integracao.ModuloCompromisso
 
             Assert.AreEqual(compromissoOriginal, compromissoSelecionado);
         }
+
+        [TestMethod]
+        public void Deve_ExcluirRegistro_ComSucesso()
+        {
+            // Arrange - Arranjo
+            Contato contato = Builder<Contato>.CreateNew().With(c => c.Id = Guid.NewGuid()).Build();
+
+            TimeSpan horaInicio = DateTime.Now.TimeOfDay;
+            TimeSpan horaTermino = horaInicio.Add(TimeSpan.FromHours(2));
+
+            Compromisso compromisso = new Compromisso("Assunto Teste", DateTime.Now, horaInicio, horaTermino, TipoCompromisso.Presencial, "Local teste", null, contato);
+            compromisso.Id = Guid.NewGuid();
+
+            repositorioCompromisso?.Cadastrar(compromisso);
+
+            // Act - Ação
+            repositorioCompromisso?.Excluir(compromisso.Id);
+
+            // Assert
+            Compromisso compromissoSelecionado = repositorioCompromisso.SelecionarRegistroPorId(compromisso.Id);
+
+            Assert.IsNull(compromissoSelecionado);
+        }
     }
 }

@@ -4,10 +4,10 @@ using eAgenda.Testes.Integracao.Compartilhado;
 namespace eAgenda.Testes.Integracao.ModuloContato
 {
     [TestClass]
+    [TestCategory("Testes de Integração de Contatos")]
     public sealed class RepositorioContatoTestes : TestFixture
     {
         [TestMethod]
-        [TestCategory("Testes de Integração de Contatos")]
         public void Deve_CadastrarRegistro_ComSucesso()
         {
             Contato contato = new Contato("Teste", "(49) 99999-9999", "teste@teste.com", "Empresa Teste", "Cargo Teste");

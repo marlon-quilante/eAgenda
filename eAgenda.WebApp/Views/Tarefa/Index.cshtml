@@ -37,12 +37,12 @@
                 <div class="card-body">
                     <p class="card-text mb-0"><strong>Título: </strong>@t.Titulo</p>
                     <p class="card-text mb-0"><strong>Prioridade: </strong>@t.Prioridade</p>
-                    <p class="card-text mb-0"><strong>Data de Criação: </strong>@t.DataCriacao</p>
+                    <p class="card-text mb-0"><strong>Data de Criação: </strong>@t.DataCriacao.ToString("dd/MM/yyyy")</p>
                     <p class="card-text mb-0"><strong>Percentual de Conclusão: </strong>@t.PercentualConclusao.ToString("F2") %</p>
 
                     @if (t.DataConclusao is not null)
                     {
-                        <p class="card-text mb-0"><strong>Data de Conclusão: </strong>@t.DataConclusao</p>
+                        <p class="card-text mb-0"><strong>Data de Conclusão: </strong>@t.DataConclusao?.ToString("dd/MM/yyyy")</p>
                     }
 
                     <div class="d-flex justify-content-start mt-2">

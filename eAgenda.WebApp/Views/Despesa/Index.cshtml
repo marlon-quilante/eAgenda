@@ -19,7 +19,7 @@
             <div class="card h-100">
                 <div class="card-body">
                     <p class="card-text mb-0"><strong>Descrição: </strong>@d.Descricao</p>
-                    <p class="card-text mb-0"><strong>Data: </strong>@d.DataOcorrencia.ToShortDateString()</p>
+                    <p class="card-text mb-0"><strong>Data: </strong>@d.DataOcorrencia.ToString("dd/MM/yyyy")</p>
                     <p class="card-text mb-0"><strong>Valor: </strong>@d.Valor.ToString("C2")</p>
                     <p class="card-text mb-0"><strong>Categorias: </strong>@string.Join(", ", d.Categorias.Select(x => x.Titulo))</p>
 

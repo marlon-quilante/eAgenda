@@ -19,7 +19,7 @@
             <div class="card h-100">
                 <div class="card-body">
                     <p class="card-text mb-0"><strong>Assunto: </strong>@c.Assunto</p>
-                    <p class="card-text mb-0"><strong>Data: </strong>@c.Data.ToShortDateString()</p>
+                    <p class="card-text mb-0"><strong>Data: </strong>@c.Data.ToString("dd/MM/yyyy")</p>
                     <p class="card-text mb-0"><strong>Horário: </strong>@c.HoraInicio.ToString(@"hh\:mm") - @c.HoraTermino.ToString(@"hh\:mm")</p>
                     <p class="card-text mb-0"><strong>Tipo: </strong>@c.Tipo</p>
 

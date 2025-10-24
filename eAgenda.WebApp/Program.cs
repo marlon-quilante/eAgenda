@@ -1,5 +1,7 @@
 using eAgenda.Infraestrutura.Orm;
 using eAgenda.WebApp.Config;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace eAgenda.WebApp
 {
@@ -14,7 +16,21 @@ namespace eAgenda.WebApp
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new List<CultureInfo>
+                {
+                    new CultureInfo("pt-BR")
+                };
+
+                options.DefaultRequestCulture = new RequestCulture("pt-BR");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+
             var app = builder.Build();
+
+            app.UseRequestLocalization();
 
             app.ApplyMigrations();
 

@@ -1,6 +1,4 @@
-﻿using eAgenda.Dominio.ModuloContato;
-using eAgenda.Dominio.ModuloTarefa;
-using eAgenda.Infraestrutura.Orm.ModuloContato;
+﻿using eAgenda.Dominio.ModuloTarefa;
 using eAgenda.Infraestrutura.Orm.ModuloTarefa;
 using eAgenda.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;

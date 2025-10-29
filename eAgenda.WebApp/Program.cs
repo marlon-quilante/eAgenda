@@ -1,3 +1,4 @@
+using eAgenda.Dominio.ModuloAutenticacao;
 using eAgenda.Infraestrutura.Orm;
 using eAgenda.WebApp.Config;
 using Microsoft.AspNetCore.Localization;
@@ -12,6 +13,7 @@ namespace eAgenda.WebApp
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddCamadaInfraestrutura(builder.Configuration);
+            builder.Services.AddIdentityProviderConfig();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

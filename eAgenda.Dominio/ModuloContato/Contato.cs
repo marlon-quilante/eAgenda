@@ -21,6 +21,7 @@ namespace eAgenda.Dominio.ModuloContato
             Email = email;
             Empresa = empresa;
             Cargo = cargo;
+            Id = Guid.NewGuid();
         }
     }
 }

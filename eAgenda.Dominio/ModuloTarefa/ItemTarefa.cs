@@ -15,6 +15,7 @@ namespace eAgenda.Dominio.ModuloTarefa
             Titulo = titulo;
             StatusConclusao = false;
             Tarefa = tarefa;
+            Id = Guid.NewGuid();
         }
     }
 }

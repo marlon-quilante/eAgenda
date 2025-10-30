@@ -22,6 +22,7 @@ namespace eAgenda.Dominio.ModuloTarefa
             DataConclusao = null;
             StatusConclusao = false;
             PercentualConclusao = 0;
+            Id = Guid.NewGuid();
         }
     }
 }

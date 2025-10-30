@@ -17,6 +17,7 @@ namespace eAgenda.Infraestrutura.Orm.ModuloDespesa
             builder.Property(x => x.Valor).IsRequired().HasPrecision(18, 2);
             builder.Property(x => x.FormaPagamento).IsRequired();
             builder.HasMany(x => x.Categorias).WithMany(c => c.Despesas).UsingEntity(x => x.ToTable("TBCategoria_TBDespesa"));
+            builder.HasOne(x => x.Usuario).WithMany().HasForeignKey(x => x.UsuarioId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

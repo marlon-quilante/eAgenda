@@ -13,6 +13,7 @@ namespace eAgenda.Dominio.ModuloCategoria
         public Categoria(string titulo)
         {
             Titulo = titulo;
+            Id = Guid.NewGuid();
         }
 
         public Categoria(Guid id, string titulo)

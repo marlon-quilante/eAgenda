@@ -20,6 +20,7 @@ namespace eAgenda.Dominio.ModuloDespesa
             Valor = valor;
             FormaPagamento = formaPagamento;
             Categorias = categorias;
+            Id = Guid.NewGuid();
         }
     }
 }

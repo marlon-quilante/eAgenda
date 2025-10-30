@@ -3,6 +3,7 @@ using eAgenda.Infraestrutura.Orm.ModuloCategoria;
 using eAgenda.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace eAgenda.WebApp.Controllers
 {
@@ -42,6 +43,10 @@ namespace eAgenda.WebApp.Controllers
                 return View(cadastrarVM);
 
             Categoria categoria = new Categoria(cadastrarVM.Titulo);
+
+            var claim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+
+            categoria.UsuarioId = Guid.Parse(claim!.Value);
 
             repositorioCategoria.Cadastrar(categoria);
 

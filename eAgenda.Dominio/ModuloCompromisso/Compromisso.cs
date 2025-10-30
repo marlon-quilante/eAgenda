@@ -26,6 +26,7 @@ namespace eAgenda.Dominio.ModuloCompromisso
             Local = local;
             Link = link;
             Contato = contato;
+            Id = Guid.NewGuid();
         }
 
         public bool HorarioDisponivel(DateTime data, Guid id, TimeSpan horaInicio, TimeSpan horaTermino)

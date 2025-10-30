@@ -1,4 +1,5 @@
 ﻿using eAgenda.Infraestrutura.Orm;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 
 namespace eAgenda.Dominio.ModuloAutenticacao
@@ -18,6 +19,20 @@ namespace eAgenda.Dominio.ModuloAutenticacao
             })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Autenticacao/Login";
+                options.AccessDeniedPath = "/";
+            });
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(options =>
+                    {
+                        options.Cookie.Name = "AspNetCore.Cookies";
+                        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                        options.SlidingExpiration = true;
+                    });
         }
     }
 }

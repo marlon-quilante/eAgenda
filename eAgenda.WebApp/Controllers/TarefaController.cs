@@ -1,10 +1,12 @@
 ﻿using eAgenda.Dominio.ModuloTarefa;
 using eAgenda.Infraestrutura.Orm.ModuloTarefa;
 using eAgenda.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eAgenda.WebApp.Controllers
 {
+    [Authorize]
     [Route("Tarefas")]
     public class TarefaController : Controller
     {

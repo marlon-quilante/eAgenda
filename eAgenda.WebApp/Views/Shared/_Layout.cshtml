@@ -25,24 +25,39 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="@contatosSelecionado" href="/Contatos">Contatos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="@compromissosSelecionado" href="/Compromissos">Compromissos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="@categoriasSelecionado" href="/Categorias">Categorias</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="@despesasSelecionado" href="/Despesas">Despesas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="@tarefasSelecionado" href="/Tarefas">Tarefas</a>
-                        </li>
-                    </ul>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end">
+
+                    @if (User.Identity is not null && User.Identity.IsAuthenticated)
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="@contatosSelecionado" href="/Contatos">Contatos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="@compromissosSelecionado" href="/Compromissos">Compromissos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="@categoriasSelecionado" href="/Categorias">Categorias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="@despesasSelecionado" href="/Despesas">Despesas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="@tarefasSelecionado" href="/Tarefas">Tarefas</a>
+                            </li>
+                        </ul>
+
+                        <div class="ms-5">
+                            <form asp-controller="Autenticacao" asp-action="Logout" method="post">
+                                <button 
+                                    class="btn btn" 
+                                    style="color: darkorange;" 
+                                    type="submit" title="Sair">
+                                    <i class="bi bi-box-arrow-left"></i>
+                                </button>
+                            </form>
+                        </div>
+                    }
                 </div>
             </div>
         </nav>

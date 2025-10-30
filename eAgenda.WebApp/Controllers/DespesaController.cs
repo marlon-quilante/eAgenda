@@ -4,10 +4,12 @@ using eAgenda.Infraestrutura.Orm;
 using eAgenda.Infraestrutura.Orm.ModuloCategoria;
 using eAgenda.Infraestrutura.Orm.ModuloDespesa;
 using eAgenda.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eAgenda.WebApp.Controllers
 {
+    [Authorize]
     [Route("Despesas")]
     public class DespesaController : Controller
     {

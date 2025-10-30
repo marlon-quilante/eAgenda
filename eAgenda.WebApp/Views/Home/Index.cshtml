@@ -14,14 +14,24 @@
         Seja para uso pessoal ou profissional, o e-Agenda é o assistente digital ideal para ajudar você a manter tudo em ordem.
     </p>
 
-    <div class="d-flex justify-content-center gap-2 mb-3">
-        <a class="btn btnTemaHome" href="/Contatos">Contatos</a>
-        <a class="btn btnTemaHome" href="/Compromissos">Compromissos</a>
-    </div>
+    @if (User.Identity is not null && User.Identity.IsAuthenticated)
+    {
+        <div class="d-flex justify-content-center gap-2 mb-3">
+            <a class="btn btnTemaHome" href="/Contatos">Contatos</a>
+            <a class="btn btnTemaHome" href="/Compromissos">Compromissos</a>
+        </div>
 
-    <div class="d-flex justify-content-center gap-2 mb-3">
-        <a class="btn btnTemaHome" href="/Categorias">Categorias</a>
-        <a class="btn btnTemaHome" href="/Despesas">Despesas</a>
-        <a class="btn btnTemaHome" href="/Tarefas">Tarefas</a>
-    </div>
+        <div class="d-flex justify-content-center gap-2 mb-3">
+            <a class="btn btnTemaHome" href="/Categorias">Categorias</a>
+            <a class="btn btnTemaHome" href="/Despesas">Despesas</a>
+            <a class="btn btnTemaHome" href="/Tarefas">Tarefas</a>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center gap-2 mb-3">
+            <a class="btn btn-primary px-5 align-content-center fw-bold" style="background-color: darkorange; border-color: darkorange; font-size: 20px;" href="/Autenticacao/Registro">Registro</a>
+            <a class="btn btnTemaHome" href="/Autenticacao/Login">Login</a>
+        </div>
+    }
 </div>

@@ -1,10 +1,12 @@
 ﻿using eAgenda.Dominio.ModuloContato;
 using eAgenda.Infraestrutura.Orm.ModuloContato;
 using eAgenda.WebApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eAgenda.WebApp.Controllers
 {
+    [Authorize]
     [Route("Contatos")]
     public class ContatoController : Controller
     {

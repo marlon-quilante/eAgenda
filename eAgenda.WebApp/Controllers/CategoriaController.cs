@@ -1,9 +1,9 @@
-﻿using eAgenda.Dominio.ModuloCategoria;
+﻿using eAgenda.Dominio.ModuloAutenticacao;
+using eAgenda.Dominio.ModuloCategoria;
 using eAgenda.Infraestrutura.Orm.ModuloCategoria;
 using eAgenda.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace eAgenda.WebApp.Controllers
 {
@@ -12,10 +12,12 @@ namespace eAgenda.WebApp.Controllers
     public class CategoriaController : Controller
     {
         private readonly IRepositorioCategoria repositorioCategoria;
+        private readonly ITenantProvider tenantProvider;
 
-        public CategoriaController(IRepositorioCategoria repositorioCategoria)
+        public CategoriaController(IRepositorioCategoria repositorioCategoria, ITenantProvider tenantProvider)
         {
             this.repositorioCategoria = repositorioCategoria;
+            this.tenantProvider = tenantProvider;
         }
 
         [HttpGet]
@@ -42,13 +44,11 @@ namespace eAgenda.WebApp.Controllers
             if (!ModelState.IsValid)
                 return View(cadastrarVM);
 
-            Categoria categoria = new Categoria(cadastrarVM.Titulo);
+            Categoria novaCategoria = new Categoria(cadastrarVM.Titulo);
 
-            var claim = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+            novaCategoria.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
 
-            categoria.UsuarioId = Guid.Parse(claim!.Value);
-
-            repositorioCategoria.Cadastrar(categoria);
+            repositorioCategoria.Cadastrar(novaCategoria);
 
             return RedirectToAction(nameof(Index));
         }

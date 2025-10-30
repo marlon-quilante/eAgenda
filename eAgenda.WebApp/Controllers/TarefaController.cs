@@ -1,4 +1,5 @@
-﻿using eAgenda.Dominio.ModuloTarefa;
+﻿using eAgenda.Dominio.ModuloAutenticacao;
+using eAgenda.Dominio.ModuloTarefa;
 using eAgenda.Infraestrutura.Orm.ModuloTarefa;
 using eAgenda.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -12,11 +13,13 @@ namespace eAgenda.WebApp.Controllers
     {
         private readonly IRepositorioTarefa repositorioTarefa;
         private readonly IRepositorioItemTarefa repositorioItemTarefa;
+        private readonly ITenantProvider tenantProvider;
 
-        public TarefaController(IRepositorioTarefa repositorioTarefa, IRepositorioItemTarefa repositorioItemTarefa)
+        public TarefaController(IRepositorioTarefa repositorioTarefa, IRepositorioItemTarefa repositorioItemTarefa, ITenantProvider tenantProvider)
         {
             this.repositorioTarefa = repositorioTarefa;
             this.repositorioItemTarefa = repositorioItemTarefa;
+            this.tenantProvider = tenantProvider;
         }
 
         [HttpGet]
@@ -53,9 +56,11 @@ namespace eAgenda.WebApp.Controllers
             if (!ModelState.IsValid)
                 return View(cadastrarVM);
 
-            Tarefa tarefa = new Tarefa(cadastrarVM.Titulo, cadastrarVM.Prioridade);
+            Tarefa novaTarefa = new Tarefa(cadastrarVM.Titulo, cadastrarVM.Prioridade);
 
-            repositorioTarefa.Cadastrar(tarefa);
+            novaTarefa.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
+
+            repositorioTarefa.Cadastrar(novaTarefa);
 
             return RedirectToAction(nameof(Index));
         }

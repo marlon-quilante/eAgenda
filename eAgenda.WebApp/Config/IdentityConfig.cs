@@ -1,4 +1,5 @@
 ﻿using eAgenda.Infraestrutura.Orm;
+using eAgenda.WebApp.Config;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 
@@ -8,6 +9,8 @@ namespace eAgenda.Dominio.ModuloAutenticacao
     {
         public static void AddIdentityProviderConfig(this IServiceCollection services)
         {
+            services.AddScoped<ITenantProvider, IdentityTenantProvider>();
+
             services.AddIdentity<Usuario, Cargo>(options =>
             {
                 options.User.RequireUniqueEmail = true;

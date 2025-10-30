@@ -1,4 +1,6 @@
-﻿using eAgenda.Dominio.ModuloCompromisso;
+﻿using eAgenda.Dominio.ModuloAutenticacao;
+using eAgenda.Dominio.ModuloCategoria;
+using eAgenda.Dominio.ModuloCompromisso;
 using eAgenda.Dominio.ModuloContato;
 using eAgenda.Infraestrutura.Orm.ModuloCompromisso;
 using eAgenda.Infraestrutura.Orm.ModuloContato;
@@ -14,11 +16,13 @@ namespace eAgenda.WebApp.Controllers
     {
         private readonly IRepositorioCompromisso repositorioCompromisso;
         private readonly IRepositorioContato repositorioContato;
+        private readonly ITenantProvider tenantProvider;
 
-        public CompromissoController(IRepositorioCompromisso repositorioCompromisso, IRepositorioContato repositorioContato)
+        public CompromissoController(IRepositorioCompromisso repositorioCompromisso, IRepositorioContato repositorioContato, ITenantProvider tenantProvider)
         {
             this.repositorioCompromisso = repositorioCompromisso;
             this.repositorioContato = repositorioContato;
+            this.tenantProvider = tenantProvider;
         }
 
         [HttpGet]
@@ -65,6 +69,8 @@ namespace eAgenda.WebApp.Controllers
 
             Contato contatoSelecionado = repositorioContato.SelecionarRegistroPorId(cadastrarVM.ContatoId.GetValueOrDefault());
             Compromisso novoCompromisso = new Compromisso(cadastrarVM.Assunto, cadastrarVM.Data, cadastrarVM.HoraInicio, cadastrarVM.HoraTermino, cadastrarVM.Tipo, cadastrarVM.Local, cadastrarVM.Link, contatoSelecionado);
+
+            novoCompromisso.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
 
             repositorioCompromisso.Cadastrar(novoCompromisso);
 

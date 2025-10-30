@@ -1,4 +1,5 @@
-﻿using eAgenda.Dominio.ModuloCategoria;
+﻿using eAgenda.Dominio.ModuloAutenticacao;
+using eAgenda.Dominio.ModuloCategoria;
 using eAgenda.Dominio.ModuloDespesa;
 using eAgenda.Infraestrutura.Orm;
 using eAgenda.Infraestrutura.Orm.ModuloCategoria;
@@ -15,12 +16,14 @@ namespace eAgenda.WebApp.Controllers
     {
         private readonly IRepositorioDespesa repositorioDespesa;
         private readonly IRepositorioCategoria repositorioCategoria;
+        private readonly ITenantProvider tenantProvider;
         private readonly AppDbContext context;
 
-        public DespesaController(IRepositorioDespesa repositorioDespesa, IRepositorioCategoria repositorioCategoria, AppDbContext context)
+        public DespesaController(IRepositorioDespesa repositorioDespesa, IRepositorioCategoria repositorioCategoria, ITenantProvider tenantProvider, AppDbContext context)
         {
             this.repositorioDespesa = repositorioDespesa;
             this.repositorioCategoria = repositorioCategoria;
+            this.tenantProvider = tenantProvider;
             this.context = context;
         }
 
@@ -66,6 +69,8 @@ namespace eAgenda.WebApp.Controllers
                         novaDespesa.Categorias.Add(c);
                 }
             }
+
+            novaDespesa.UsuarioId = tenantProvider.UsuarioId.GetValueOrDefault();
 
             repositorioDespesa.Cadastrar(novaDespesa);
 

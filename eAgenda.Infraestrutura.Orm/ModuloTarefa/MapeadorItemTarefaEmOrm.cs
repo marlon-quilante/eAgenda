@@ -14,7 +14,6 @@ namespace eAgenda.Infraestrutura.Orm.ModuloTarefa
             builder.Property(x => x.Titulo).IsRequired().HasMaxLength(100);
             builder.Property(x => x.StatusConclusao).IsRequired().HasDefaultValue(false);
             builder.HasOne(x => x.Tarefa).WithMany(i => i.ItensTarefa).OnDelete(DeleteBehavior.Cascade).IsRequired();
-            builder.HasOne(x => x.Usuario).WithMany().HasForeignKey(x => x.UsuarioId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

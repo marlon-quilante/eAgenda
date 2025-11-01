@@ -32,7 +32,7 @@ namespace eAgenda.Infraestrutura.Orm
                 modelBuilder.Entity<Categoria>().HasQueryFilter(x => x.UsuarioId == tenantProvider.UsuarioId);
                 modelBuilder.Entity<Despesa>().HasQueryFilter(x => x.UsuarioId == tenantProvider.UsuarioId);
                 modelBuilder.Entity<Tarefa>().HasQueryFilter(x => x.UsuarioId == tenantProvider.UsuarioId);
-                modelBuilder.Entity<ItemTarefa>().HasQueryFilter(x => x.UsuarioId == tenantProvider.UsuarioId);
+                modelBuilder.Entity<ItemTarefa>().HasQueryFilter(x => x.Tarefa.UsuarioId == tenantProvider.UsuarioId);
             }
 
             modelBuilder.ApplyConfiguration(new MapeadorContatoEmOrm());

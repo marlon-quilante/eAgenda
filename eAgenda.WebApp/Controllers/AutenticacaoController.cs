@@ -22,6 +22,13 @@ namespace eAgenda.WebApp.Controllers
         {
             Usuario usuario = new Usuario() { UserName = registroVM.Email, Email = registroVM.Email };
 
+            if (!ModelState.IsValid)
+            {
+                registroVM = new RegistroViewModel();
+
+                return View(registroVM);
+            }
+
             IdentityResult? usuarioResult = await userManager.CreateAsync(usuario, registroVM.Senha);
 
             if (!usuarioResult.Succeeded)
@@ -44,6 +51,8 @@ namespace eAgenda.WebApp.Controllers
                 return View(registroVM);
             }
 
+            SignInResult resultadoLogin = await signInManager.PasswordSignInAsync(registroVM.Email, registroVM.Senha, isPersistent: true, lockoutOnFailure: false);
+
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
@@ -60,6 +69,15 @@ namespace eAgenda.WebApp.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginViewModel loginVM, string? returnUrl = null)
         {
+            if (!ModelState.IsValid)
+            {
+                loginVM = new LoginViewModel();
+
+                ViewData["ReturnUrl"] = returnUrl;
+
+                return View(loginVM);
+            }
+
             SignInResult resultadoLogin = await signInManager.PasswordSignInAsync(loginVM.Email, loginVM.Senha, isPersistent: true, lockoutOnFailure: false);
 
             if (!resultadoLogin.Succeeded)

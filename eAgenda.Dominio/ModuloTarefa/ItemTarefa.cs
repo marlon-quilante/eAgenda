@@ -2,8 +2,9 @@
 
 namespace eAgenda.Dominio.ModuloTarefa
 {
-    public class ItemTarefa : EntidadeBase<ItemTarefa>
+    public class ItemTarefa
     {
+        public Guid Id { get; set; }
         public string Titulo { get; set; }
         public bool StatusConclusao { get; set; }
         public Tarefa Tarefa { get; set; }

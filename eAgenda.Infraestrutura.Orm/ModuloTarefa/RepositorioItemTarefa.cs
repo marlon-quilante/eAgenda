@@ -18,6 +18,9 @@ namespace eAgenda.Infraestrutura.Orm.ModuloTarefa
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(idTarefa);
 
             tarefa.ItensTarefa.Add(novoItem);
+
+            context.ItensTarefa.Add(novoItem);
+
             context.SaveChanges();
 
             repositorioTarefa.AtualizarPercentualConclusao(tarefa.Id);

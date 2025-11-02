@@ -1,5 +1,4 @@
 ﻿using eAgenda.Dominio.ModuloCategoria;
-using eAgenda.Dominio.ModuloContato;
 using eAgenda.Testes.Integracao.Compartilhado;
 
 namespace eAgenda.Testes.Integracao.ModuloCategoria

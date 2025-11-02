@@ -1,8 +1,5 @@
-﻿using eAgenda.Dominio.ModuloCategoria;
-using eAgenda.Dominio.ModuloDespesa;
-using eAgenda.Dominio.ModuloTarefa;
+﻿using eAgenda.Dominio.ModuloTarefa;
 using eAgenda.Testes.Integracao.Compartilhado;
-using FizzWare.NBuilder;
 
 namespace eAgenda.Testes.Integracao.ModuloTarefa
 {

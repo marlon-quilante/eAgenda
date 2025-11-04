@@ -34,7 +34,10 @@ namespace eAgenda.WebApp
 
             app.UseRequestLocalization();
 
-            app.ApplyMigrations();
+            if (app.Environment.IsDevelopment())
+            {
+                app.ApplyMigrations();
+            }
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

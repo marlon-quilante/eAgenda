@@ -50,7 +50,7 @@ jobs:
     - name: Install EF Core CLI
       run: dotnet tool install --global dotnet-ef
     - name: Apply EF Core migrations
-      run: dotnet ef database update --project ./eAgenda.Infraestrutura.Orm --startup project ./eAgenda.WebApp
+      run: dotnet ef database update --project ./eAgenda.Infraestrutura.Orm --startup-project ./eAgenda.WebApp
       env:
         SQL_CONNECTION_STRING: ${{ secrets.SQL_CONNECTION_STRING }}
 

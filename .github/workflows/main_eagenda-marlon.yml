@@ -35,7 +35,7 @@ jobs:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
   migrate:
-    runs-on: windows
+    runs-on: windows-latest
     needs: build
     permissions:
       contents: read

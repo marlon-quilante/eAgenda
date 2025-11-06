@@ -24,14 +24,7 @@ namespace eAgenda.Testes.Integracao.Compartilhado
         {
             var assembly = typeof(TestFixture).Assembly;
 
-            IConfiguration configuration = new ConfigurationBuilder().AddUserSecrets(assembly).AddEnvironmentVariables().Build();
-
-            string? connectionString = configuration["SQL_CONNECTION_STRING"];
-
-            if (string.IsNullOrWhiteSpace(connectionString)) 
-                throw new Exception("A variável \"SQL_CONNECTION_STRING\" não foi informada.");
-
-            context = AppDbContextFactory.CriarDbContext(connectionString);
+            context = AppDbContextFactory.CriarDbContext();
 
             context.Database.EnsureCreated();
 

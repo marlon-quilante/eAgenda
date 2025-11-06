@@ -10,5 +10,12 @@ namespace eAgenda.Infraestrutura.Orm
 
             return new AppDbContext(builder.Options);
         }
+
+        public static AppDbContext CriarDbContext()
+        {
+            var builder = new DbContextOptionsBuilder<AppDbContext>().UseInMemoryDatabase("eAgendaDb");
+
+            return new AppDbContext(builder.Options);
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using eAgenda.Dominio.ModuloAutenticacao;
 using eAgenda.Dominio.ModuloTarefa;
+using eAgenda.Infraestrutura.Orm;
 using eAgenda.Infraestrutura.Orm.ModuloTarefa;
 using eAgenda.WebApp.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -11,12 +12,14 @@ namespace eAgenda.WebApp.Controllers
     [Route("Tarefas")]
     public class TarefaController : Controller
     {
+        private readonly AppDbContext context;
         private readonly IRepositorioTarefa repositorioTarefa;
         private readonly IRepositorioItemTarefa repositorioItemTarefa;
         private readonly ITenantProvider tenantProvider;
 
-        public TarefaController(IRepositorioTarefa repositorioTarefa, IRepositorioItemTarefa repositorioItemTarefa, ITenantProvider tenantProvider)
+        public TarefaController(AppDbContext context, IRepositorioTarefa repositorioTarefa, IRepositorioItemTarefa repositorioItemTarefa, ITenantProvider tenantProvider)
         {
+            this.context = context;
             this.repositorioTarefa = repositorioTarefa;
             this.repositorioItemTarefa = repositorioItemTarefa;
             this.tenantProvider = tenantProvider;
@@ -109,7 +112,10 @@ namespace eAgenda.WebApp.Controllers
         [HttpPost("Concluir/{id:guid}")]
         public IActionResult Concluir(Guid id)
         {
-            repositorioTarefa.Concluir(id);
+            Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(id);
+
+            tarefa.MarcarConcluido();
+            context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
@@ -117,7 +123,10 @@ namespace eAgenda.WebApp.Controllers
         [HttpPost("DesfazerConclusao/{id:guid}")]
         public IActionResult DesfazerConclusao(Guid id)
         {
-            repositorioTarefa.DesfazerConclusao(id);
+            Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(id);
+
+            tarefa.MarcarPendente();
+            context.SaveChanges();
 
             return RedirectToAction(nameof(Index));
         }
@@ -149,7 +158,10 @@ namespace eAgenda.WebApp.Controllers
                 return View(nameof(ItensTarefa), itensTarefaVM);
             }
 
-            repositorioItemTarefa.Cadastrar(itemTarefa, tarefa.Id);
+            tarefa.AdicionarItem(itemTarefa);
+            context.ItensTarefa.Add(itemTarefa);
+
+            context.SaveChanges();
 
             return RedirectToAction("ItensTarefa", new { idTarefa = tarefa.Id });
         }
@@ -157,10 +169,14 @@ namespace eAgenda.WebApp.Controllers
         [HttpPost("RemoverItemTarefa")]
         public IActionResult RemoverItemTarefa(Guid idTarefa, Guid idItem)
         {
-            ItemTarefa itemTarefa = repositorioItemTarefa.SelecionarItemPorId(idItem);
+            ItemTarefa? itemTarefa = repositorioItemTarefa.SelecionarItemPorId(idItem);
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(idTarefa);
 
-            repositorioItemTarefa.Excluir(idItem);
+            if (itemTarefa is not null)
+            {
+                tarefa.RemoverItem(itemTarefa);
+                context.SaveChanges();
+            }
 
             return RedirectToAction("ItensTarefa", new { idTarefa = tarefa.Id });
         }
@@ -168,10 +184,15 @@ namespace eAgenda.WebApp.Controllers
         [HttpPost("ConcluirItemTarefa")]
         public IActionResult ConcluirItemTarefa(Guid idTarefa, Guid idItem)
         {
-            ItemTarefa itemTarefa = repositorioItemTarefa.SelecionarItemPorId(idItem);
+            ItemTarefa? itemTarefa = repositorioItemTarefa.SelecionarItemPorId(idItem);
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(idTarefa);
 
-            repositorioItemTarefa.Concluir(idItem);
+            if (itemTarefa is not null)
+            {
+                itemTarefa.MarcarConcluido();
+                tarefa.AtualizarPercentualConclusao();
+                context.SaveChanges();
+            }
 
             return RedirectToAction("ItensTarefa", new { idTarefa = tarefa.Id });
         }

@@ -68,7 +68,7 @@ namespace eAgenda.Testes.Integracao.ModuloTarefa
             repositorioTarefa?.Cadastrar(tarefa2);
             repositorioTarefa?.Cadastrar(tarefa3);
 
-            repositorioTarefa?.Concluir(tarefa2.Id);
+            tarefa2.MarcarConcluido();
 
             // Act
             List<Tarefa>? tarefasSelecionadas = repositorioTarefa?.SelecionarRegistros()?.Where(x => x.StatusConclusao == true).ToList();
@@ -92,7 +92,7 @@ namespace eAgenda.Testes.Integracao.ModuloTarefa
             repositorioTarefa?.Cadastrar(tarefa2);
             repositorioTarefa?.Cadastrar(tarefa3);
 
-            repositorioTarefa?.Concluir(tarefa2.Id);
+            tarefa2.MarcarConcluido();
 
             // Act
             List<Tarefa>? tarefasSelecionadas = repositorioTarefa?.SelecionarRegistros()?.Where(x => x.StatusConclusao == false).ToList();

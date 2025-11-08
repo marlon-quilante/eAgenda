@@ -1,6 +1,4 @@
-﻿using eAgenda.Dominio.Compartilhado;
-
-namespace eAgenda.Dominio.ModuloTarefa
+﻿namespace eAgenda.Dominio.ModuloTarefa
 {
     public class ItemTarefa
     {
@@ -17,6 +15,11 @@ namespace eAgenda.Dominio.ModuloTarefa
             StatusConclusao = false;
             Tarefa = tarefa;
             Id = Guid.NewGuid();
+        }
+
+        public void MarcarConcluido()
+        {
+            StatusConclusao = true;
         }
     }
 }

@@ -49,35 +49,5 @@ namespace eAgenda.Infraestrutura.Orm.ModuloTarefa
         {
             return context.Tarefas.Include(x => x.ItensTarefa).ToList();
         }
-
-        public void AtualizarPercentualConclusao(Guid id)
-        {
-            Tarefa tarefa = SelecionarRegistroPorId(id);
-
-            if (tarefa is null) return;
-
-            tarefa.AtualizarPercentualConclusao();
-            context.SaveChanges();
-        }
-
-        public void Concluir(Guid id)
-        {
-            Tarefa tarefa = SelecionarRegistroPorId(id);
-
-            if (tarefa is null) return;
-
-            tarefa.MarcarConcluido();
-            context.SaveChanges();
-        }
-
-        public void DesfazerConclusao(Guid id)
-        {
-            Tarefa tarefa = SelecionarRegistroPorId(id);
-
-            if (tarefa is null) return;
-
-            tarefa.MarcarPendente();
-            context.SaveChanges();
-        }
     }
 }

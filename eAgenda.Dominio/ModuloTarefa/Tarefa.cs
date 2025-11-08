@@ -37,6 +37,18 @@ namespace eAgenda.Dominio.ModuloTarefa
             DataConclusao = null;
         }
 
+        public void AdicionarItem(ItemTarefa item)
+        {
+            ItensTarefa.Add(item);
+            AtualizarPercentualConclusao();
+        }
+
+        public void RemoverItem(ItemTarefa item)
+        {
+            ItensTarefa.Remove(item);
+            AtualizarPercentualConclusao();
+        }
+
         public void AtualizarPercentualConclusao()
         {
             decimal qtdItensTotal = ItensTarefa.Count();

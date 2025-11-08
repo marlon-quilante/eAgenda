@@ -24,5 +24,33 @@ namespace eAgenda.Dominio.ModuloTarefa
             PercentualConclusao = 0;
             Id = Guid.NewGuid();
         }
+
+        public void MarcarConcluido()
+        {
+            StatusConclusao = true;
+            DataConclusao = DateTime.Now;
+        }
+
+        public void MarcarPendente()
+        {
+            StatusConclusao = false;
+            DataConclusao = null;
+        }
+
+        public void AtualizarPercentualConclusao()
+        {
+            decimal qtdItensTotal = ItensTarefa.Count();
+            decimal qtdItensConcluidos = ItensTarefa.Where(x => x.StatusConclusao == true).Count();
+
+            if (qtdItensTotal == 0)
+            {
+                PercentualConclusao = 0;
+                return;
+            }
+
+            decimal percentualConclusao = (qtdItensConcluidos / qtdItensTotal) * 100;
+
+            PercentualConclusao = percentualConclusao;
+        }
     }
 }

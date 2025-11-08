@@ -56,18 +56,7 @@ namespace eAgenda.Infraestrutura.Orm.ModuloTarefa
 
             if (tarefa is null) return;
 
-            decimal qtdItensTotal = tarefa.ItensTarefa.Count();
-            decimal qtdItensConcluidos = tarefa.ItensTarefa.Where(x => x.StatusConclusao == true).Count();
-
-            if (qtdItensTotal == 0)
-            {
-                tarefa.PercentualConclusao = 0;
-                return;
-            }
-
-            decimal percentualConclusao = (qtdItensConcluidos / qtdItensTotal) * 100;
-
-            tarefa.PercentualConclusao = percentualConclusao;
+            tarefa.AtualizarPercentualConclusao();
             context.SaveChanges();
         }
 
@@ -77,8 +66,7 @@ namespace eAgenda.Infraestrutura.Orm.ModuloTarefa
 
             if (tarefa is null) return;
 
-            tarefa.StatusConclusao = true;
-            tarefa.DataConclusao = DateTime.Now;
+            tarefa.MarcarConcluido();
             context.SaveChanges();
         }
 
@@ -88,8 +76,7 @@ namespace eAgenda.Infraestrutura.Orm.ModuloTarefa
 
             if (tarefa is null) return;
 
-            tarefa.StatusConclusao = false;
-            tarefa.DataConclusao = null;
+            tarefa.MarcarPendente();
             context.SaveChanges();
         }
     }

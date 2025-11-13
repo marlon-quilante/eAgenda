@@ -17,25 +17,25 @@
                 <form asp-action="Registro" asp-route-returnUrl="@ViewData["ReturnUrl"]" class="mt-3">
                     <div class="mb-3">
                         <label asp-for="Email" class="control-label fw-bold">Email:</label>
-                        <input asp-for="Email" class="form-control" />
+                        <input asp-for="Email" class="form-control" data-se="inputEmail" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="Senha" class="control-label fw-bold">Senha:</label>
-                        <input asp-for="Senha" class="form-control" type="password" />
+                        <input asp-for="Senha" class="form-control" type="password" data-se="inputSenha" />
                         <span asp-validation-for="Senha" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="SenhaConfirmada" class="control-label fw-bold">Confirmação da Senha:</label>
-                        <input asp-for="SenhaConfirmada" class="form-control" type="password" />
+                        <input asp-for="SenhaConfirmada" class="form-control" type="password" data-se="inputSenhaConfirmada" />
                         <span asp-validation-for="SenhaConfirmada" class="text-danger"></span>
                     </div>
 
                     <div class="form-group d-flex align-items-center gap-2">
                         <a asp-action="Login">Já tenho uma conta</a>
-                        <button type="submit" class="btn btnTema rounded-3 px-5 ms-auto">Confirmar</button>
+                        <button type="submit" class="btn btnTema rounded-3 px-5 ms-auto" data-se="btnConfirmar">Confirmar</button>
                     </div>
                 </form>
             </div>

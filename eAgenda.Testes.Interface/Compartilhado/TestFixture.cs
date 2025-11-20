@@ -23,11 +23,13 @@ namespace eAgenda.Testes.Interface.Compartilhado
         [AssemblyCleanup]
         public static void LimparAmbiente()
         {
-            if (webDriver == null)
+            if (webDriver is null || dbContext is null)
                 return;
 
             webDriver.Quit();
             webDriver.Dispose();
+
+            dbContext.Database.EnsureDeleted();
         }
 
         [TestInitialize]

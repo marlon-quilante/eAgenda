@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace eAgenda.WebApp.Controllers
 {
     [Authorize]
-    [Route("Categorias")]
+    [Route("categorias")]
     public class CategoriaController : Controller
     {
         private readonly IRepositorioCategoria repositorioCategoria;
@@ -30,7 +30,7 @@ namespace eAgenda.WebApp.Controllers
             return View(visualizarVM);
         }
 
-        [HttpGet("Cadastrar")]
+        [HttpGet("cadastrar")]
         public IActionResult Cadastrar()
         {
             CadastrarCategoriaViewModel cadastrarVM = new CadastrarCategoriaViewModel();
@@ -38,7 +38,7 @@ namespace eAgenda.WebApp.Controllers
             return View(cadastrarVM);
         }
 
-        [HttpPost("Cadastrar")]
+        [HttpPost("cadastrar")]
         public IActionResult Cadastrar(CadastrarCategoriaViewModel cadastrarVM)
         {
             if (!ModelState.IsValid)
@@ -53,7 +53,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Editar/{id:guid}")]
+        [HttpGet("editar/{id:guid}")]
         public IActionResult Editar(Guid id)
         {
             Categoria categoria = repositorioCategoria.SelecionarRegistroPorId(id);
@@ -63,7 +63,7 @@ namespace eAgenda.WebApp.Controllers
             return View(editarVM);
         }
 
-        [HttpPost("Editar/{id:guid}")]
+        [HttpPost("editar/{id:guid}")]
         public IActionResult Editar(EditarCategoriaViewModel editarVM)
         {
             if (!ModelState.IsValid)
@@ -76,7 +76,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Excluir/{id:guid}")]
+        [HttpGet("excluir/{id:guid}")]
         public IActionResult Excluir(Guid id)
         {
             Categoria categoria = repositorioCategoria.SelecionarRegistroPorId(id);
@@ -86,7 +86,7 @@ namespace eAgenda.WebApp.Controllers
             return View(excluirVM);
         }
 
-        [HttpPost("Excluir/{id:guid}")]
+        [HttpPost("excluir/{id:guid}")]
         public IActionResult ExclusaoConfirmada(Guid id)
         {
             repositorioCategoria.Excluir(id);
@@ -94,7 +94,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Despesas/{id:guid}")]
+        [HttpGet("despesas/{id:guid}")]
         public IActionResult Despesas(Guid id)
         {
             Categoria categoria = repositorioCategoria.SelecionarRegistroPorId(id);

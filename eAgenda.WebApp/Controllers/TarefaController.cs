@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace eAgenda.WebApp.Controllers
 {
     [Authorize]
-    [Route("Tarefas")]
+    [Route("tarefas")]
     public class TarefaController : Controller
     {
         private readonly AppDbContext context;
@@ -45,7 +45,7 @@ namespace eAgenda.WebApp.Controllers
             return View(visualizarVM);
         }
 
-        [HttpGet("Cadastrar")]
+        [HttpGet("cadastrar")]
         public IActionResult Cadastrar()
         {
             CadastrarTarefaViewModel cadastrarVM = new CadastrarTarefaViewModel();
@@ -53,7 +53,7 @@ namespace eAgenda.WebApp.Controllers
             return View(cadastrarVM);
         }
 
-        [HttpPost("Cadastrar")]
+        [HttpPost("cadastrar")]
         public IActionResult Cadastrar(CadastrarTarefaViewModel cadastrarVM)
         {
             if (!ModelState.IsValid)
@@ -68,7 +68,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Editar/{id:guid}")]
+        [HttpGet("editar/{id:guid}")]
         public IActionResult Editar(Guid id)
         {
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(id);
@@ -78,7 +78,7 @@ namespace eAgenda.WebApp.Controllers
             return View(editarVM);
         }
 
-        [HttpPost("Editar/{id:guid}")]
+        [HttpPost("editar/{id:guid}")]
         public IActionResult Editar(EditarTarefaViewModel editarVM)
         {
             if (!ModelState.IsValid)
@@ -91,7 +91,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Excluir/{id:guid}")]
+        [HttpGet("excluir/{id:guid}")]
         public IActionResult Excluir(Guid id)
         {
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(id);
@@ -101,7 +101,7 @@ namespace eAgenda.WebApp.Controllers
             return View(excluirVM);
         }
 
-        [HttpPost("Excluir/{id:guid}")]
+        [HttpPost("excluir/{id:guid}")]
         public IActionResult ExclusaoConfirmada(Guid id)
         {
             repositorioTarefa.Excluir(id);
@@ -109,7 +109,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost("Concluir/{id:guid}")]
+        [HttpPost("concluir/{id:guid}")]
         public IActionResult Concluir(Guid id)
         {
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(id);
@@ -120,7 +120,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpPost("DesfazerConclusao/{id:guid}")]
+        [HttpPost("desfazerConclusao/{id:guid}")]
         public IActionResult DesfazerConclusao(Guid id)
         {
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(id);
@@ -131,7 +131,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("ItensTarefa/{idTarefa:guid}")]
+        [HttpGet("itenstarefa/{idTarefa:guid}")]
         public IActionResult ItensTarefa(Guid idTarefa)
         {
             Tarefa tarefa = repositorioTarefa.SelecionarRegistroPorId(idTarefa);
@@ -144,7 +144,7 @@ namespace eAgenda.WebApp.Controllers
             return View(itensTarefaVM);
         }
 
-        [HttpPost("AdicionarItemTarefa")]
+        [HttpPost("adicionaritemtarefa")]
         public IActionResult AdicionarItemTarefa(AdicionarItemTarefaViewModel adicionarItemVM, Guid idTarefa)
         {
             DetalhesItensTarefaViewModel itensTarefaVM = new DetalhesItensTarefaViewModel();
@@ -163,10 +163,10 @@ namespace eAgenda.WebApp.Controllers
 
             context.SaveChanges();
 
-            return RedirectToAction("ItensTarefa", new { idTarefa = tarefa.Id });
+            return RedirectToAction(nameof(ItensTarefa), new { idTarefa = tarefa.Id });
         }
 
-        [HttpPost("RemoverItemTarefa")]
+        [HttpPost("removeritemtarefa")]
         public IActionResult RemoverItemTarefa(Guid idTarefa, Guid idItem)
         {
             ItemTarefa? itemTarefa = repositorioItemTarefa.SelecionarItemPorId(idItem);
@@ -178,10 +178,10 @@ namespace eAgenda.WebApp.Controllers
                 context.SaveChanges();
             }
 
-            return RedirectToAction("ItensTarefa", new { idTarefa = tarefa.Id });
+            return RedirectToAction(nameof(ItensTarefa), new { idTarefa = tarefa.Id });
         }
 
-        [HttpPost("ConcluirItemTarefa")]
+        [HttpPost("concluiritemtarefa")]
         public IActionResult ConcluirItemTarefa(Guid idTarefa, Guid idItem)
         {
             ItemTarefa? itemTarefa = repositorioItemTarefa.SelecionarItemPorId(idItem);
@@ -194,7 +194,7 @@ namespace eAgenda.WebApp.Controllers
                 context.SaveChanges();
             }
 
-            return RedirectToAction("ItensTarefa", new { idTarefa = tarefa.Id });
+            return RedirectToAction(nameof(ItensTarefa), new { idTarefa = tarefa.Id });
         }
     }
 }

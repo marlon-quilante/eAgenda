@@ -1,7 +1,7 @@
 ﻿using eAgenda.Testes.Interface.Compartilhado;
 using OpenQA.Selenium;
 
-namespace eAgenda.Testes.Interface
+namespace eAgenda.Testes.Interface.ModuloAutenticacao
 {
     [TestClass]
     [TestCategory("Testes de Interface de Autenticação")]
@@ -10,7 +10,7 @@ namespace eAgenda.Testes.Interface
         [TestMethod]
         public void Deve_RegistrarUsuario_ComSucesso()
         {
-            webDriver?.Navigate().GoToUrl(Path.Combine(enderecoBase, "Autenticacao", "Registro"));
+            webDriver?.Navigate().GoToUrl(Path.Combine(enderecoBase, "autenticacao", "registro"));
 
             webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).SendKeys("teste@gmail.com");
             webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputSenha]"))).SendKeys("MarlonQuilante@123");
@@ -25,7 +25,7 @@ namespace eAgenda.Testes.Interface
         public void Deve_AutenticarUsuario_ComSucesso()
         {
             // Arranjo
-            webDriver?.Navigate().GoToUrl(Path.Combine(enderecoBase, "Autenticacao", "Registro"));
+            webDriver?.Navigate().GoToUrl(Path.Combine(enderecoBase, "autenticacao", "registro"));
 
             webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).SendKeys("teste@gmail.com");
             webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputSenha]"))).SendKeys("MarlonQuilante@123");

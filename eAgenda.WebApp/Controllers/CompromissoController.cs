@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace eAgenda.WebApp.Controllers
 {
     [Authorize]
-    [Route("Compromissos")]
+    [Route("compromissos")]
     public class CompromissoController : Controller
     {
         private readonly IRepositorioCompromisso repositorioCompromisso;
@@ -35,7 +35,7 @@ namespace eAgenda.WebApp.Controllers
             return View(visualizarVM);
         }
 
-        [HttpGet("Cadastrar")]
+        [HttpGet("cadastrar")]
         public IActionResult Cadastrar()
         {
             List<Contato> contatosDisponiveis = repositorioContato.SelecionarRegistros();
@@ -45,7 +45,7 @@ namespace eAgenda.WebApp.Controllers
             return View(cadastrarVM);
         }
 
-        [HttpPost("Cadastrar")]
+        [HttpPost("cadastrar")]
         public IActionResult Cadastrar(CadastrarCompromissoViewModel cadastrarVM)
         {
             if (!ModelState.IsValid)
@@ -77,7 +77,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Editar/{id:guid}")]
+        [HttpGet("editar/{id:guid}")]
         public IActionResult Editar(Guid id)
         {
             Compromisso compromisso = repositorioCompromisso.SelecionarRegistroPorId(id);
@@ -95,7 +95,7 @@ namespace eAgenda.WebApp.Controllers
             return View(editarVM);
         }
 
-        [HttpPost("Editar/{id:guid}")]
+        [HttpPost("editar/{id:guid}")]
         public IActionResult Editar(EditarCompromissoViewModel editarVM)
         {
             Contato contatoSelecionado = repositorioContato.SelecionarRegistroPorId(editarVM.ContatoId.GetValueOrDefault());
@@ -136,7 +136,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Excluir/{id:guid}")]
+        [HttpGet("excluir/{id:guid}")]
         public IActionResult Excluir(Guid id)
         {
             Compromisso compromisso = repositorioCompromisso.SelecionarRegistroPorId(id);
@@ -146,7 +146,7 @@ namespace eAgenda.WebApp.Controllers
             return View(excluirVM);
         }
 
-        [HttpPost("Excluir/{id:guid}")]
+        [HttpPost("excluir/{id:guid}")]
         public IActionResult ExclusaoConfirmada(Guid id)
         {
             repositorioCompromisso.Excluir(id);

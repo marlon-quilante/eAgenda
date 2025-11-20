@@ -6,10 +6,10 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace eAgenda.WebApp.Controllers
 {
-    [Route("Autenticacao")]
+    [Route("autenticacao")]
     public class AutenticacaoController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager) : Controller
     {
-        [HttpGet("Registro")]
+        [HttpGet("registro")]
         public IActionResult Registro()
         {
             var registroVM = new RegistroViewModel();
@@ -17,7 +17,7 @@ namespace eAgenda.WebApp.Controllers
             return View(registroVM);
         }
 
-        [HttpPost("Registro")]
+        [HttpPost("registro")]
         public async Task<IActionResult> Registro(RegistroViewModel registroVM)
         {
             Usuario usuario = new Usuario() { UserName = registroVM.Email, Email = registroVM.Email };
@@ -56,7 +56,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        [HttpGet("Login")]
+        [HttpGet("login")]
         public IActionResult Login(string? returnUrl = null)
         {
             var loginVM = new LoginViewModel();
@@ -66,7 +66,7 @@ namespace eAgenda.WebApp.Controllers
             return View(loginVM);
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login(LoginViewModel loginVM, string? returnUrl = null)
         {
             if (!ModelState.IsValid)
@@ -91,7 +91,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        [HttpPost("Logout")]
+        [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();

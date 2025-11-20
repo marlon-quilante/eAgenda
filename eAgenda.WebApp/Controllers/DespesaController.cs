@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace eAgenda.WebApp.Controllers
 {
     [Authorize]
-    [Route("Despesas")]
+    [Route("despesas")]
     public class DespesaController : Controller
     {
         private readonly IRepositorioDespesa repositorioDespesa;
@@ -36,7 +36,7 @@ namespace eAgenda.WebApp.Controllers
             return View(visualizarVM);
         }
 
-        [HttpGet("Cadastrar")]
+        [HttpGet("cadastrar")]
         public IActionResult Cadastrar()
         {
             List<Categoria> categoriasDisponiveis = repositorioCategoria.SelecionarRegistros();
@@ -46,7 +46,7 @@ namespace eAgenda.WebApp.Controllers
             return View(cadastrarVM);
         }
 
-        [HttpPost("Cadastrar")]
+        [HttpPost("cadastrar")]
         public IActionResult Cadastrar(CadastrarDespesaViewModel cadastrarVM)
         {
             List<Categoria> categorias = repositorioCategoria.SelecionarRegistros();
@@ -77,7 +77,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Editar/{id:guid}")]
+        [HttpGet("editar/{id:guid}")]
         public IActionResult Editar(Guid id)
         {
             Despesa despesa = repositorioDespesa.SelecionarRegistroPorId(id);
@@ -89,7 +89,7 @@ namespace eAgenda.WebApp.Controllers
             return View(editarVM);
         }
 
-        [HttpPost("Editar/{id:guid}")]
+        [HttpPost("editar/{id:guid}")]
         public IActionResult Editar(EditarDespesaViewModel editarVM)
         {
             List<Categoria> categoriasDisponiveis = repositorioCategoria.SelecionarRegistros();
@@ -118,7 +118,7 @@ namespace eAgenda.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [HttpGet("Excluir/{id:guid}")]
+        [HttpGet("excluir/{id:guid}")]
         public IActionResult Excluir(Guid id)
         {
             Despesa despesa = repositorioDespesa.SelecionarRegistroPorId(id);
@@ -128,7 +128,7 @@ namespace eAgenda.WebApp.Controllers
             return View(excluirVM);
         }
 
-        [HttpPost("Excluir/{id:guid}")]
+        [HttpPost("excluir/{id:guid}")]
         public IActionResult ExclusaoConfirmada(Guid id)
         {
             repositorioDespesa.Excluir(id);

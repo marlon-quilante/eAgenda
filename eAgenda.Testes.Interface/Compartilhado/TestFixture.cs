@@ -33,7 +33,7 @@ namespace eAgenda.Testes.Interface.Compartilhado
         }
 
         [TestInitialize]
-        public void InicializarTest()
+        public void InicializarTeste()
         {
             if (dbContext is null || webDriver is null)
                 return;
@@ -57,6 +57,19 @@ namespace eAgenda.Testes.Interface.Compartilhado
             webDriver.Manage().Cookies.DeleteAllCookies();
 
             webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+        }
+
+        protected void RegistrarEAutenticarUsuario()
+        {
+            webDriver?.Navigate().GoToUrl(Path.Combine(enderecoBase, "autenticacao", "registro"));
+
+            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).SendKeys("teste@gmail.com");
+            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputSenha]"))).SendKeys("MarlonQuilante@123");
+            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputSenhaConfirmada]"))).SendKeys("MarlonQuilante@123");
+
+            webDriverWait?.Until(d => d.FindElement(By.CssSelector("button[data-se=btnConfirmar]"))).Click();
+
+            webDriverWait?.Until(d => d.PageSource.Contains("Página Inicial"));
         }
     }
 }

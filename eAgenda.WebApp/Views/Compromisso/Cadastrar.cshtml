@@ -10,53 +10,53 @@
             <form class="container-fluid mt-3" asp-action="Cadastrar" method="post">
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="Assunto">Assunto:</label>
-                    <input class="form-control" asp-for="Assunto" id="Assunto" type="text" placeholder="Assunto do compromisso" />
+                    <input class="form-control" asp-for="Assunto" id="Assunto" type="text" placeholder="Assunto do compromisso" data-se="inputAssunto" />
                     <span asp-validation-for="Assunto" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="Data">Data:</label>
-                    <input class="form-control" asp-for="Data" id="Data" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                    <input class="form-control" asp-for="Data" id="Data" type="date" value="@DateTime.Now.ToString("yyyy-MM-dd")" data-se="inputData" />
                     <span asp-validation-for="Data" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="HoraInicio">Horário de Início:</label>
-                    <input class="form-control" asp-for="HoraInicio" id="HoraInicio" type="time" />
+                    <input class="form-control" asp-for="HoraInicio" id="HoraInicio" type="time" data-se="inputHoraInicio" />
                     <span asp-validation-for="HoraInicio" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="HoraTermino">Horário de Término:</label>
-                    <input class="form-control" asp-for="HoraTermino" id="HoraTermino" type="time" />
+                    <input class="form-control" asp-for="HoraTermino" id="HoraTermino" type="time" data-se="inputHoraTermino" />
                     <span asp-validation-for="HoraTermino" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="Tipo">Tipo:</label>
-                    <select class="form-select" asp-for="Tipo" name="Tipo" asp-items="@Model.TiposDisponiveis"></select>
+                    <select class="form-select" asp-for="Tipo" name="Tipo" asp-items="@Model.TiposDisponiveis" data-se="inputTipo"></select>
                     <span asp-validation-for="Tipo" class="text-danger"></span>
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="Local">Local:</label>
-                    <input class="form-control" asp-for="Local" id="Local" type="text" placeholder="Local do compromisso (caso seja presencial)" />
+                    <input class="form-control" asp-for="Local" id="Local" type="text" placeholder="Local do compromisso (caso seja presencial)" data-se="inputLocal" />
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="Link">Link:</label>
-                    <input class="form-control" asp-for="Link" id="Link" type="text" placeholder="Link do compromisso (caso seja remoto)" />
+                    <input class="form-control" asp-for="Link" id="Link" type="text" placeholder="Link do compromisso (caso seja remoto)" data-se="inputLink" />
                 </div>
 
                 <div class="mb-3">
                     <label class="form-label fw-bold" asp-for="ContatoId">Contato:</label>
-                    <select class="form-select" asp-for="ContatoId" name="ContatoId" asp-items="@Model.ContatosDisponiveis"></select>
+                    <select class="form-select" asp-for="ContatoId" name="ContatoId" asp-items="@Model.ContatosDisponiveis" data-se="inputContatoId"></select>
                     <span asp-validation-for="ContatoId" class="text-danger"></span>
                 </div>
 
                 <div class="d-flex justify-content-end gap-2">
                     <a class="btn btnVoltar" asp-action="Index">Voltar</a>
-                    <button class="btn btnTema" type="submit">Salvar</button>
+                    <button class="btn btnTema" type="submit" data-se="btnSalvar">Salvar</button>
                 </div>
             </form>
         </div>

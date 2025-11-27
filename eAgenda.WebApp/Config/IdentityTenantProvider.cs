@@ -11,7 +11,7 @@ namespace eAgenda.WebApp.Config
             {
                 var claim = contextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier);
                 
-                return Guid.Parse(claim!.Value);
+                return claim is not null ? Guid.Parse(claim.Value) : null;
             }
         }
     }

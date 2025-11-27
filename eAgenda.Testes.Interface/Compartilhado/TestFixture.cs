@@ -1,4 +1,5 @@
 ﻿using eAgenda.Infraestrutura.Orm;
+using Microsoft.Extensions.DependencyInjection;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -8,28 +9,45 @@ namespace eAgenda.Testes.Interface.Compartilhado
     [TestClass]
     public abstract class TestFixture
     {
+        protected static SeleniumWebApplicationFactory? serverFactory;
         protected static WebDriver? webDriver;
         protected static WebDriverWait? webDriverWait;
         protected static AppDbContext? dbContext;
-        protected string enderecoBase = "https://localhost:9001";
+        protected static string enderecoBase = null!;
 
         [AssemblyInitialize]
         public static void InicializarTestFixture(TestContext testContext)
         {
-            dbContext = AppDbContextFactory.CriarDbContext("Data source=(LocalDB)\\MSSQLLocalDB;Initial Catalog=eAgendaTest;Integrated Security=True;");
+            serverFactory = new SeleniumWebApplicationFactory();
+
+            dbContext = serverFactory.Servicos.GetRequiredService<AppDbContext>();
+            enderecoBase = serverFactory.UrlKestrel;
+
             webDriver = new ChromeDriver();
         }
-        
+
         [AssemblyCleanup]
         public static void LimparAmbiente()
         {
-            if (webDriver is null || dbContext is null)
-                return;
+            if (webDriver is not null)
+            {
+                webDriver.Quit();
+                webDriver.Dispose();
+                webDriver = null;
+            }
 
-            webDriver.Quit();
-            webDriver.Dispose();
+            if (dbContext is not null)
+            {
+                dbContext.Database.EnsureDeleted();
+                dbContext.Dispose();
+                dbContext = null;
+            }
 
-            dbContext.Database.EnsureDeleted();
+            if (serverFactory is not null)
+            {
+                serverFactory?.Dispose();
+                serverFactory = null;
+            }
         }
 
         [TestInitialize]
@@ -70,6 +88,25 @@ namespace eAgenda.Testes.Interface.Compartilhado
             webDriverWait?.Until(d => d.FindElement(By.CssSelector("button[data-se=btnConfirmar]"))).Click();
 
             webDriverWait?.Until(d => d.PageSource.Contains("Página Inicial"));
+        }
+
+        protected static void NavegarPara(string caminhoRelativo)
+        {
+            var enderecoBaseUri = new Uri(enderecoBase);
+
+            var uri = new Uri(enderecoBaseUri, caminhoRelativo);
+
+            webDriver?.Navigate().GoToUrl(uri);
+        }
+
+        protected static IWebElement EsperarPorElemento(By localizador)
+        {
+            return webDriverWait!.Until(driver =>
+            {
+                var elemento = driver.FindElement(localizador);
+
+                return elemento.Displayed ? elemento : null;
+            });
         }
     }
 }

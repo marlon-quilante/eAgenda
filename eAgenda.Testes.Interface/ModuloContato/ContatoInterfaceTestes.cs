@@ -11,25 +11,15 @@ namespace eAgenda.Testes.Interface.ModuloContato
         public void Deve_CadastrarContato_ComSucesso()
         {
             // Arranjo
-            this.RegistrarEAutenticarUsuario();
-
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refContatos']"))).Click();
-            webDriverWait?.Until(d => d.Title.Contains("Contatos"));
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refCadastrar']"))).Click();
+            RegistrarEAutenticarUsuario();
 
             // Ação
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputNome]"))).SendKeys("Marlon Q");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputTelefone]"))).SendKeys("(49) 99999-9999");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).SendKeys("marlonq@gmail.com");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmpresa]"))).SendKeys("Softecsul Tecnologia");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputCargo]"))).SendKeys("Software Tester");
-
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("button[data-se=btnSalvar]"))).Click();
+            CadastrarContato();
 
             // Asserção
             webDriverWait?.Until(d => d.Title.Contains("Contatos"));
 
-            webDriverWait?.Until(d => d.PageSource.Contains("Marlon Quilante"));
+            webDriverWait?.Until(d => d.PageSource.Contains("Marlon Q"));
             webDriverWait?.Until(d => d.PageSource.Contains("(49) 99999-9999"));
             webDriverWait?.Until(d => d.PageSource.Contains("marlonq@gmail.com"));
             webDriverWait?.Until(d => d.PageSource.Contains("Softecsul Tecnologia"));
@@ -40,41 +30,32 @@ namespace eAgenda.Testes.Interface.ModuloContato
         public void Deve_EditarContato_ComSucesso()
         {
             // Arranjo
-            this.RegistrarEAutenticarUsuario();
+            RegistrarEAutenticarUsuario();
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refContatos']"))).Click();
-            webDriverWait?.Until(d => d.Title.Contains("Contatos"));
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refCadastrar']"))).Click();
-
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputNome]"))).SendKeys("Marlon Q");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputTelefone]"))).SendKeys("(49) 99999-9999");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).SendKeys("marlonq@gmail.com");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmpresa]"))).SendKeys("Softecsul Tecnologia");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputCargo]"))).SendKeys("Software Tester");
-
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("button[data-se=btnSalvar]"))).Click();
+            CadastrarContato();
 
             webDriverWait?.Until(d => d.Title.Contains("Contatos"));
 
             // Ação
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refEditar']"))).Click();
+            EsperarPorElemento(By.CssSelector("a[data-se='refEditar']")).Click();
+            webDriverWait?.Until(d => d.Title.Contains("Edição de Contato"));
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputNome]"))).Clear();
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputNome]"))).SendKeys("Marlon Q Editado");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputNome]")).Clear();
+            EsperarPorElemento(By.CssSelector("input[data-se=inputNome]")).SendKeys("Marlon Q Editado");
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputTelefone]"))).Clear();
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputTelefone]"))).SendKeys("(49) 99999-1111");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputTelefone]")).Clear();
+            EsperarPorElemento(By.CssSelector("input[data-se=inputTelefone]")).SendKeys("(49) 99999-1111");
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).Clear();
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).SendKeys("marlonqeditado@gmail.com");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputEmail]")).Clear();
+            EsperarPorElemento(By.CssSelector("input[data-se=inputEmail]")).SendKeys("marlonqeditado@gmail.com");
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmpresa]"))).Clear();
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmpresa]"))).SendKeys("Softecsul Tecnologia Editado");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputEmpresa]")).Clear();
+            EsperarPorElemento(By.CssSelector("input[data-se=inputEmpresa]")).SendKeys("Softecsul Tecnologia Editado");
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputCargo]"))).Clear();
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputCargo]"))).SendKeys("Software Tester Editado");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputCargo]")).Clear();
+            EsperarPorElemento(By.CssSelector("input[data-se=inputCargo]")).SendKeys("Software Tester Editado");
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("button[data-se=btnSalvar]"))).Click();
+            EsperarPorElemento(By.CssSelector("button[data-se=btnSalvar]")).Click();
 
             // Asserção
             webDriverWait?.Until(d => d.Title.Contains("Contatos"));
@@ -90,30 +71,33 @@ namespace eAgenda.Testes.Interface.ModuloContato
         public void Deve_ExcluirContato_ComSucesso()
         {
             // Arranjo
-            this.RegistrarEAutenticarUsuario();
+            RegistrarEAutenticarUsuario();
 
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refContatos']"))).Click();
-            webDriverWait?.Until(d => d.Title.Contains("Contatos"));
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refCadastrar']"))).Click();
-
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputNome]"))).SendKeys("Marlon Q");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputTelefone]"))).SendKeys("(49) 99999-9999");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmail]"))).SendKeys("marlonq@gmail.com");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputEmpresa]"))).SendKeys("Softecsul Tecnologia");
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("input[data-se=inputCargo]"))).SendKeys("Software Tester");
-
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("button[data-se=btnSalvar]"))).Click();
+            CadastrarContato();
 
             webDriverWait?.Until(d => d.Title.Contains("Contatos"));
 
             // Ação
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("a[data-se='refExcluir']"))).Click();
+            EsperarPorElemento(By.CssSelector("a[data-se='refExcluir']")).Click();
             webDriverWait?.Until(d => d.Title.Contains("Exclusão de Contato"));
-            webDriverWait?.Until(d => d.FindElement(By.CssSelector("button[data-se=btnExcluir]"))).Click();
+            EsperarPorElemento(By.CssSelector("button[data-se=btnExcluir]")).Click();
 
             // Asserção
             webDriverWait?.Until(d => d.Title.Contains("Contatos"));
             webDriverWait?.Until(d => !d.PageSource.Contains("Marlon Q Editado"));
+        }
+
+        public static void CadastrarContato()
+        {
+            NavegarPara("contatos/cadastrar");
+
+            EsperarPorElemento(By.CssSelector("input[data-se=inputNome]")).SendKeys("Marlon Q");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputTelefone]")).SendKeys("(49) 99999-9999");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputEmail]")).SendKeys("marlonq@gmail.com");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputEmpresa]")).SendKeys("Softecsul Tecnologia");
+            EsperarPorElemento(By.CssSelector("input[data-se=inputCargo]")).SendKeys("Software Tester");
+
+            EsperarPorElemento(By.CssSelector("button[data-se=btnSalvar]")).Click();
         }
     }
 }

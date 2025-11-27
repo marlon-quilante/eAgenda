@@ -9,6 +9,8 @@ namespace eAgenda.Testes.Interface.Compartilhado
     [TestClass]
     public abstract class TestFixture
     {
+        public TestContext TestContext { get; set; } = null!;
+
         protected static SeleniumWebApplicationFactory? serverFactory;
         protected static WebDriver? webDriver;
         protected static WebDriverWait? webDriverWait;
@@ -23,7 +25,26 @@ namespace eAgenda.Testes.Interface.Compartilhado
             dbContext = serverFactory.Servicos.GetRequiredService<AppDbContext>();
             enderecoBase = serverFactory.UrlKestrel;
 
-            webDriver = new ChromeDriver();
+            ChromeOptions chromeOptions = new ChromeOptions();
+
+            // Se estiver no GitHub Actions (CI não está vazia)
+            if (!string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("CI")))
+            {
+                chromeOptions.AddArguments(
+                "--headless",              // Sem interface gráfica
+                "--no-sandbox",            // Necessário para Docker/CI
+                "--disable-dev-shm-usage", // Evita problemas de memória
+                "--disable-gpu",           // Desabilita GPU
+                "--window-size=1920,1080", // Resolução fixa
+                "--lang=pt-BR"             // Configura cultura do navegador fixa
+                );
+            }
+            else
+            {
+                chromeOptions.AddArgument("--start-fullscreen");
+            }
+
+                webDriver = new ChromeDriver();
         }
 
         [AssemblyCleanup]
@@ -75,6 +96,35 @@ namespace eAgenda.Testes.Interface.Compartilhado
             webDriver.Manage().Cookies.DeleteAllCookies();
 
             webDriverWait = new WebDriverWait(webDriver, TimeSpan.FromSeconds(5));
+        }
+
+        [TestCleanup]
+        public void EncerrarTeste()
+        {
+            if (TestContext.CurrentTestOutcome is not UnitTestOutcome.Failed)
+                return;
+
+            if (webDriver is null)
+                return;
+
+            try
+            {
+                Console.WriteLine("=========== [DEBUG] ===========");
+                Console.WriteLine();
+                Console.WriteLine($"Teste: {TestContext.TestName}");
+                Console.WriteLine($"Resultado: {TestContext.CurrentTestOutcome}");
+                Console.WriteLine($"Url da página atual: {webDriver.Url}");
+                Console.WriteLine($"Título da página atual: {webDriver.Title}");
+                Console.WriteLine();
+                Console.WriteLine("------ PageSource ------");
+                Console.WriteLine(webDriver.PageSource);
+                Console.WriteLine();
+                Console.WriteLine("=========== [FIM DO DEBUG] ===========");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[DEBUG] Erro ao coletar evidências: {ex}");
+            }
         }
 
         protected void RegistrarEAutenticarUsuario()

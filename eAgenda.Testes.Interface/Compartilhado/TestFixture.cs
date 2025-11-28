@@ -44,7 +44,7 @@ namespace eAgenda.Testes.Interface.Compartilhado
                 chromeOptions.AddArgument("--start-fullscreen");
             }
 
-                webDriver = new ChromeDriver();
+            webDriver = new ChromeDriver(chromeOptions);
         }
 
         [AssemblyCleanup]

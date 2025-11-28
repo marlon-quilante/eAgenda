@@ -89,7 +89,7 @@ namespace eAgenda.Testes.Interface.ModuloContato
 
         public static void CadastrarContato()
         {
-            NavegarPara("contatos/cadastrar");
+            NavegarPara("/contatos/cadastrar");
 
             EsperarPorElemento(By.CssSelector("input[data-se=inputNome]")).SendKeys("Marlon Q");
             EsperarPorElemento(By.CssSelector("input[data-se=inputTelefone]")).SendKeys("(49) 99999-9999");

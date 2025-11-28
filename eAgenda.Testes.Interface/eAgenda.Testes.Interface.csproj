@@ -7,6 +7,7 @@
     <Nullable>enable</Nullable>
     <UseVSTest>true</UseVSTest>
     <UserSecretsId>5a415e83-e74f-4f7a-b680-eb7b5f75a501</UserSecretsId>
+	<PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>

@@ -71,7 +71,7 @@ namespace eAgenda.Testes.Interface.ModuloCompromisso
 
             // Ação
             webDriverWait?.Until(d => d.Title.Contains("Compromissos"));
-            EsperarPorElemento(By.CssSelector("a[data-se='refEditar']")).Click();
+            EsperarPorElemento(By.CssSelector("a[data-se=refEditar]")).Click();
 
             EsperarPorElemento(By.CssSelector("input[data-se=inputAssunto]")).Clear();
             EsperarPorElemento(By.CssSelector("input[data-se=inputAssunto]")).SendKeys("Call");
@@ -126,7 +126,8 @@ namespace eAgenda.Testes.Interface.ModuloCompromisso
         private void CadastrarCompromisso()
         {
             ContatoInterfaceTestes.CadastrarContato();
-            NavegarPara("compromissos/cadastrar");
+            webDriverWait?.Until(d => d.Title.Contains("Contatos"));
+            NavegarPara("/compromissos/cadastrar");
             PreencherCamposBasicosDeCompromissos();
             EsperarPorElemento(By.CssSelector("button[data-se=btnSalvar]")).Click();
         }
@@ -138,9 +139,9 @@ namespace eAgenda.Testes.Interface.ModuloCompromisso
             EsperarPorElemento(By.CssSelector("input[data-se=inputHoraInicio]")).SendKeys("09:00");
             EsperarPorElemento(By.CssSelector("input[data-se=inputHoraTermino]")).SendKeys("10:00");
 
-            var inputTipo = EsperarPorElemento(By.CssSelector("input[data-se=inputTipo]"));
+            var inputTipo = EsperarPorElemento(By.CssSelector("select[data-se=inputTipo]"));
 
-            var selectInputTipo = new SelectElement(EsperarPorElemento(By.CssSelector("input[data-se=inputTipo]")));
+            var selectInputTipo = new SelectElement(EsperarPorElemento(By.CssSelector("select[data-se=inputTipo]")));
             selectInputTipo.SelectByText("Presencial");
 
             EsperarPorElemento(By.CssSelector("input[data-se=inputLocal]")).SendKeys("Sala de reunião");
